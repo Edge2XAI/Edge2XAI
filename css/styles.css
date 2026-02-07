@@ -1,0 +1,172 @@
+
+  <style>
+    /* -------------------- Base Animations -------------------- */
+    .fade-in-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-up:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 16px 32px rgba(0,0,0,0.35), 0 0 12px rgba(56,189,248,0.4); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .section-title-animated {
+      background: linear-gradient(270deg, #22d3ee, #38bdf8, #facc15, #a78bfa);
+      background-size: 600% 600%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 6s ease infinite;
+    }
+	body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+section p {
+  font-size: 16.5px;
+  color: #e5e7eb;
+}
+
+section li {
+  font-size: 16px;
+  color: #d1d5db;
+}
+
+section h3 {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+	.secondary-link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 15px;
+  color: #a5f3fc;
+  text-decoration: none;
+  font-weight: 500;
+}
+.secondary-link:hover {
+  text-decoration: underline;
+}
+
+
+    /* -------------------- Journey Animation -------------------- */
+    .journey { font-size: 1.4em; font-weight: 700; letter-spacing: 0.5px; }
+    .journey .step, .journey .arrow { display: inline-block; opacity: 0; transform: translateY(8px); animation: fadeUp 0.6s ease-out forwards; }
+    .journey .step:nth-child(1) { animation-delay: 0.1s; }
+    .journey .arrow:nth-child(2) { animation-delay: 0.25s; }
+    .journey .step:nth-child(3) { animation-delay: 0.4s; }
+    .journey .arrow:nth-child(4) { animation-delay: 0.55s; }
+    .journey .step:nth-child(5) { animation-delay: 0.7s; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* -------------------- General Styles -------------------- */
+    :root { --bg: #0f172a; --card: #111827; --text: #e5e7eb; --muted: #9ca3af; --accent: #22d3ee; --accent-2: #38bdf8; }
+
+    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu; background: linear-gradient(180deg, #020617, var(--bg)); color: var(--text); line-height: 1.6; }
+    a { color: var(--accent); text-decoration: none; cursor:pointer; }
+
+    header { padding: 4rem 1.5rem 3rem; max-width: 1100px; margin: auto; }
+    .badge { display: inline-block; background: rgba(34,211,238,0.15); color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.85rem; margin-bottom: 1rem; }
+    h1 { font-size: clamp(2.4rem, 4.2vw, 3.4rem); line-height: 1.15; margin: 0.5rem 0 0.75rem; }
+    .brand { font-size: 1.05em; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .tagline { font-size: 0.7em; font-weight: 500; color: #c7d2fe; display: inline-block; margin-top: 0.25rem; }
+    .hero-sub { display: flex; align-items: flex-start; gap: 0.75rem; margin-top: 0.75rem; }
+    .accent-line { width: 4px; min-height: 48px; background: linear-gradient(180deg, var(--accent), var(--accent-2)); border-radius: 4px; flex-shrink: 0; }
+    .subtitle { max-width: 760px; font-size: 1.05rem; color: #a5b4fc; line-height: 1.55; }
+    .subtitle strong { color: #e0e7ff; font-weight: 600; }
+
+    .hero-cta { margin-top: 2rem; display: inline-block; }
+    .hero-cta button { padding: 0.85rem 1.5rem; border-radius: 12px; border: none; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #020617; font-weight: 600; font-size: 1rem; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .hero-cta button:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+
+    section { padding: 3rem 1.5rem; max-width: 1100px; margin: auto; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; align-items: stretch; }
+    .card { display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0)); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.5rem; transition: transform 0.25s ease, box-shadow 0.25s ease; position: relative; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
+    .card h3 { margin-top: 0; color: var(--accent-2); }
+    .why-card::before { content: '⚡'; font-size: 2rem; position: absolute; top: 1rem; left: 1.5rem; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+
+
+    .cta-button { margin-top: 1rem; display: inline-block; }
+    .cta-button button { padding: 0.65rem 1.2rem; border-radius: 10px; border: none; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #020617; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .cta-button button:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+
+    .convertkit-form { margin-top: 2rem; max-width: 480px; background: var(--card); padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 4rem; transition: box-shadow 0.3s ease; }
+    .convertkit-form.focused { box-shadow: 0 0 20px 4px var(--accent-2); }
+    .convertkit-form h4 { margin-top: 0; color: var(--accent-2); margin-bottom: 1rem; text-align:center; }
+    .convertkit-form input[type="email"] { width: 100%; padding: 0.75rem 1rem; border-radius: 10px; border: 1px solid #555; margin-bottom: 1rem; background: #111827; color: var(--text); font-size: 1rem; }
+    .convertkit-form button { width: 100%; padding: 0.75rem 1rem; border-radius: 12px; border: none; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #020617; font-weight: 600; font-size: 1rem; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .convertkit-form button:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+
+    @media (min-width: 1000px) { .grid .why-card { grid-column: span 2; } }
+  </style>
+  
+ <!-- Footer Styles + Shimmer -->
+  <style>
+    .footer-shimmer {
+      position:absolute;
+      top:0;
+      left:-150%;
+      width:300%;
+      height:100%;
+      background: linear-gradient(120deg, rgba(34,211,238,0.1) 0%, rgba(56,189,248,0.15) 50%, rgba(34,211,238,0.1) 100%);
+      animation: shimmer 10s linear infinite;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    @keyframes shimmer { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    footer > div { position:relative; z-index:1; }
+
+    .footer-link {
+      color:#cbd5f5;
+      text-decoration:none;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+    .footer-link:hover { color:#38bdf8; transform: translateY(-2px); }
+
+    .social-icon {
+      color:#22d3ee;
+      font-weight:600;
+      text-decoration:none;
+      position:relative;
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+    .social-icon::after {
+      content:'';
+      position:absolute;
+      bottom:-2px;
+      left:0;
+      width:0;
+      height:2px;
+      background: #38bdf8;
+      transition: width 0.3s ease;
+    }
+    .social-icon:hover { color:#38bdf8; transform: translateY(-2px); }
+    .social-icon:hover::after { width:100%; }
+
+    .footer-subscribe {
+      display:inline-block;
+      margin-top:12px;
+      padding:0.6rem 1.2rem;
+      border-radius:10px;
+      background: linear-gradient(135deg, #22d3ee, #38bdf8);
+      color:#020617;
+      font-weight:600;
+      text-decoration:none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .footer-subscribe:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+
+    @media(max-width:900px){
+      footer div { text-align:center !important; }
+      footer div > div { justify-content:center; }
+    }
+  </style>
