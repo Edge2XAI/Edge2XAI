@@ -1,16 +1,37 @@
-## Hi there 👋
+# Edge2XAI Website
 
-<!--
-**Edge2XAI/Edge2XAI** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Git-ready static website baseline.
 
-Here are some ideas to get you started:
+## Pages
+- `index.html` — Home
+- `books.html` — Knowledge
+- `practice.html` — Learning
+- `training.html` — Training & Mentorship
+- `edgeverse.html` — EdgeVerse
+- `advisory.html` — Advisory
+- `about.html` — About
+- `contact.html` — Connect
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Visual system
+Core:
+- deep navy
+- electric blue / cyan
+- white / ice-blue glass
+
+Semantic accents:
+- teal — learning, collaboration, validated/actionable progress
+- violet — mentorship, architecture growth, advanced capability
+- amber — constraints, tradeoffs, readiness
+
+## Deployment
+This is a static HTML/CSS site and can be served directly from a web host or static-site platform.
+
+Before publishing:
+1. open all eight pages locally;
+2. test desktop, tablet, and mobile widths;
+3. verify LinkedIn/GitHub destinations;
+4. optionally test the newsletter form with a disposable/test email;
+5. confirm mailto links open the preferred mail client;
+6. push the reviewed folder contents to the repository.
+
+See `GIT_READY_RELEASE_CHECKLIST.md` for the final smoke-test list.
