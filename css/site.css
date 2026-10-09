@@ -4097,3 +4097,76 @@ body{background:#fff;}
   .about-proof{grid-template-columns:1fr;}
   .about-final-chain{grid-template-columns:1fr 1fr;}
 }
+
+/* ============================================================
+   Training hero — compact sizing, "mentorship" aubergine/coral palette
+   (scoped to .training-v4-*)
+   ============================================================ */
+.training-v4-hero{
+  padding:clamp(48px,5vw,70px) 0;
+  background:
+    radial-gradient(circle at 84% 20%,rgba(255,110,170,.30),transparent 28%),
+    radial-gradient(circle at 10% 92%,rgba(255,170,70,.22),transparent 30%),
+    radial-gradient(circle at 55% 0%,rgba(150,90,255,.26),transparent 38%),
+    linear-gradient(150deg,#150a33 0%,#2b1160 52%,#4a1a78 100%);
+}
+.training-v4-hero::before{
+  background:
+    linear-gradient(118deg,transparent 0 46%,rgba(255,150,200,.10) 47%,transparent 49%),
+    linear-gradient(164deg,transparent 0 61%,rgba(255,190,100,.08) 62%,transparent 64%);
+}
+.training-v4-copy .breadcrumb,.training-v4-copy .breadcrumb a{color:#d8c6f0;}
+.training-v4-copy .eyebrow{color:#ffb86b;}
+.training-v4-copy h1{
+  max-width:none;
+  font-size:clamp(1.9rem,3.5vw,3.3rem);
+  line-height:1.05;margin-bottom:16px;
+}
+.training-v4-copy h1 em{
+  background:linear-gradient(90deg,#ff7ab8 0%,#ff9d6c 50%,#ffd27a 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.training-v4-copy .lead{max-width:600px;font-size:.95rem;line-height:1.65;color:#efe6fa;}
+.training-v4-actions{margin-top:22px;}
+.training-v4-hero .btn-primary{
+  background:linear-gradient(135deg,#ff6fb0,#ff9d5c);
+  border-color:#ffa6c9;color:#2b0a2e;
+  box-shadow:0 12px 28px -14px rgba(255,110,170,.8);
+}
+.training-v4-hero .btn-ghost{color:#fff;border-color:rgba(220,190,255,.55);background:rgba(255,255,255,.06);}
+.training-v4-visual{
+  border-color:rgba(230,190,255,.34);
+  background:
+    radial-gradient(circle at 22% 24%,rgba(255,170,70,.16),transparent 24%),
+    radial-gradient(circle at 82% 73%,rgba(255,110,170,.20),transparent 26%),
+    linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.04));
+}
+.training-v4-path{background:linear-gradient(90deg,#ffb86b,#ff7ab8 45%,#b58bff 80%,#8fe9ff);box-shadow:0 0 22px rgba(255,130,190,.5);}
+.training-v4-stage{border-color:rgba(230,190,255,.38);}
+.training-v4-stage span{color:#ffc58a;}
+.training-v4-stage small{color:#e3d4f5;}
+.training-v4-stage--two{border-color:rgba(255,150,200,.5);}
+.training-v4-stage--two span{color:#ff9cc9;}
+.training-v4-stage--three{border-color:rgba(190,150,255,.52);}
+.training-v4-stage--three span{color:#c9b0ff;}
+.training-v4-stage--four{border-color:rgba(255,210,122,.55);}
+.training-v4-stage--four span{color:#ffd88f;}
+.training-v4-feedback,.training-v4-caption{background:rgba(40,12,72,.62);border-color:rgba(230,190,255,.34);color:#f2e8fc;}
+@media(min-width:1051px){
+  .training-v4-hero-grid{grid-template-columns:1fr .85fr;}
+  .training-v4-visual{max-width:520px;width:100%;justify-self:end;min-height:420px;border-radius:22px;}
+  .training-v4-stage{width:140px;min-height:0;padding:14px 12px;border-radius:14px;}
+  .training-v4-stage span{font-size:.58rem;margin-bottom:10px;}
+  .training-v4-stage strong{font-size:.76rem;margin-bottom:4px;}
+  .training-v4-stage small{font-size:.6rem;line-height:1.4;}
+  .training-v4-path{left:8%;right:8%;}
+  .training-v4-stage--one{left:5%;top:14%;}
+  .training-v4-stage--two{left:29%;top:52%;}
+  .training-v4-stage--three{left:53%;top:14%;}
+  .training-v4-stage--four{right:4%;top:52%;}
+  .training-v4-feedback{font-size:.54rem;padding:5px 8px;}
+  .training-v4-feedback--a{left:6%;top:4%;}
+  .training-v4-feedback--c{right:6%;top:4%;}
+  .training-v4-feedback--b{left:50%;transform:translateX(-50%);top:82%;}
+  .training-v4-caption{font-size:.56rem;padding:6px 10px;bottom:4%;}
+}
