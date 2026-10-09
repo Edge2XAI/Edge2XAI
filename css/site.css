@@ -2309,7 +2309,7 @@ body{background:#fff;}
 .learning-v2-node small{display:block;color:#bddce9;font-size:.7rem;}
 .learning-v2-node--read{left:7%;top:19%;}
 .learning-v2-node--learn{left:27%;top:53%;}
-.learning-v2-node--build{left:47%;top:18%;border-color:rgba(68,224,196,.48);}
+.learning-v2-node--build{left:50%;transform:translateX(-50%);top:18%;border-color:rgba(68,224,196,.48);}
 .learning-v2-node--implement{left:67%;top:53%;border-color:rgba(151,132,255,.48);}
 .learning-v2-node--guided{right:5%;top:17%;border-color:rgba(255,191,84,.48);}
 .learning-v2-node--build span{color:#6df2dc;}
