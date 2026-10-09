@@ -4061,3 +4061,39 @@ body{background:#fff;}
   .about-v2-node{padding:7px 10px;font-size:.6rem;}
   .about-v2-caption{font-size:.58rem;}
 }
+
+/* ============================================================
+   About — credibility strip, larger thesis chain, shorter CTA
+   ============================================================ */
+.about-proof{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  margin-top:30px;border:1px solid #cfe0ee;border-radius:14px;overflow:hidden;background:#cfe0ee;
+}
+.about-proof>div{padding:18px 20px;background:#fff;}
+.about-proof strong{display:block;color:#082f61;font-size:1.02rem;margin-bottom:5px;}
+.about-proof span{display:block;color:#3e5f7c;font-size:.84rem;line-height:1.5;}
+.about-proof a{color:#0b6fb8;}
+.about-final-chain{
+  display:grid;grid-template-columns:repeat(11,auto);align-items:center;justify-content:center;
+  gap:10px;margin-top:40px;
+}
+.about-final-chain span{
+  padding:18px 20px;font-size:.92rem;font-weight:500;color:#fff;text-align:center;
+  border-color:rgba(120,230,215,.45);border-radius:14px;
+  background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.05));
+  box-shadow:0 14px 30px -22px rgba(0,0,0,.7);
+}
+.about-final-chain span:last-of-type{
+  border-color:rgba(198,245,106,.7);
+  background:linear-gradient(145deg,rgba(198,245,106,.22),rgba(45,216,194,.10));
+}
+.about-final-chain b{font-size:1.5rem;color:#5df0c8;}
+.contact-band-sub{margin:10px 0 0;color:inherit;opacity:.85;max-width:60ch;}
+@media(max-width:1180px){
+  .about-final-chain{grid-template-columns:repeat(3,1fr);}
+  .about-final-chain b{display:none;}
+}
+@media(max-width:760px){
+  .about-proof{grid-template-columns:1fr;}
+  .about-final-chain{grid-template-columns:1fr 1fr;}
+}
