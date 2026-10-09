@@ -3935,3 +3935,30 @@ body{background:#fff;}
 .advisory-v6-node--tradeoffs span{color:#c27a10;}
 .advisory-v6-tag--risk{color:#8a5208;background:rgba(255,236,205,.9);border-color:rgba(230,160,60,.5);}
 .advisory-v6-tag--validated{color:#0a7a6b;background:rgba(205,246,238,.9);border-color:rgba(40,190,165,.5);}
+
+/* ============================================================
+   Advisory hero — compact sizing (~60% headline and visual)
+   ============================================================ */
+.advisory-v6-copy h1{
+  font-size:clamp(1.8rem,3.42vw,3.3rem);
+  margin-bottom:16px;
+}
+.advisory-v6-copy .lead{font-size:.9rem;line-height:1.62;}
+@media(min-width:1051px){
+  .advisory-v6-visual{
+    width:100%;max-width:460px;justify-self:end;
+    min-height:450px;border-radius:22px;
+  }
+  .advisory-v6-signal{top:8%;height:56px;gap:6px;padding:0 10px 8px;}
+  .advisory-v6-node{
+    width:150px;min-height:0;padding:14px 12px;border-radius:14px;
+  }
+  .advisory-v6-node span{font-size:.58rem;margin-bottom:10px;}
+  .advisory-v6-node strong{font-size:.76rem;margin-bottom:4px;}
+  .advisory-v6-node small{font-size:.6rem;line-height:1.4;}
+  .advisory-v6-node--evidence,.advisory-v6-node--reason{top:38%;}
+  .advisory-v6-node--tradeoffs,.advisory-v6-node--next{top:67%;}
+  .advisory-v6-tag{font-size:.54rem;padding:5px 8px;}
+  .advisory-v6-tag--validated{top:29%;}
+  .advisory-v6-tag--risk{left:50%;transform:translateX(-50%);bottom:2.5%;}
+}
