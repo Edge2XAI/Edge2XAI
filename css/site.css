@@ -4360,3 +4360,69 @@ body{background:#fff;}
 .plan-2026-git span{color:#8f43ef;}
 @media(max-width:1000px){.plan-2026{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:560px){.plan-2026{grid-template-columns:1fr;}}
+
+/* ============================================================
+   Learning hero — compact sizing, "workshop blueprint" palette
+   (scoped to .learning-v2-*)
+   ============================================================ */
+.learning-v2-hero{
+  padding:clamp(48px,5vw,70px) 0;
+  background:
+    radial-gradient(circle at 84% 20%,rgba(255,122,61,.26),transparent 27%),
+    radial-gradient(circle at 10% 90%,rgba(56,213,255,.22),transparent 30%),
+    linear-gradient(rgba(120,200,255,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(120,200,255,.045) 1px,transparent 1px),
+    linear-gradient(150deg,#08111f 0%,#0e2340 52%,#123a5c 100%);
+  background-size:auto,auto,36px 36px,36px 36px,auto;
+}
+.learning-v2-hero::before{
+  background:linear-gradient(118deg,transparent 0 47%,rgba(255,150,90,.08) 48%,transparent 50%);
+}
+.learning-v2-copy .breadcrumb,.learning-v2-copy .breadcrumb a{color:#b4cfe4;}
+.learning-v2-copy .eyebrow{color:#ff9a5c;}
+.learning-v2-copy h1{
+  max-width:none;
+  font-size:clamp(1.9rem,3.5vw,3.3rem);
+  line-height:1.05;margin-bottom:16px;
+}
+.learning-v2-copy h1 em{
+  background:linear-gradient(90deg,#ff7a3d 0%,#ffb25a 45%,#4fe0ff 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.learning-v2-copy .lead{max-width:600px;font-size:.95rem;line-height:1.65;color:#dcebf7;}
+.learning-v2-actions{margin-top:22px;}
+.learning-v2-hero .btn-primary{
+  background:linear-gradient(135deg,#ff7a3d,#ffa24d);
+  border-color:#ffb27a;color:#2a1000;
+  box-shadow:0 12px 28px -14px rgba(255,122,61,.85);
+}
+.learning-v2-hero .btn-ghost{border-color:rgba(120,215,255,.55);}
+.learning-v2-visual{
+  border-color:rgba(120,200,255,.34);
+  background:
+    radial-gradient(circle at 22% 26%,rgba(56,213,255,.14),transparent 24%),
+    radial-gradient(circle at 80% 70%,rgba(255,122,61,.16),transparent 26%),
+    linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.04));
+}
+.learning-v2-flowline{background:linear-gradient(90deg,#4fe0ff,#2dd6bd 35%,#ffb25a 70%,#ff7a3d);box-shadow:0 0 20px rgba(79,224,255,.5);}
+.learning-v2-node{border-color:rgba(140,210,255,.36);}
+.learning-v2-node--build{border-color:rgba(79,224,255,.55);}
+.learning-v2-node--implement{border-color:rgba(255,178,90,.55);}
+.learning-v2-node--implement span{color:#ffc27a;}
+.learning-v2-node--guided{border-color:rgba(255,122,61,.6);}
+.learning-v2-node--guided span{color:#ff9a5c;}
+@media(min-width:1051px){
+  .learning-v2-hero-grid{grid-template-columns:1fr .85fr;}
+  .learning-v2-visual{max-width:520px;width:100%;justify-self:end;min-height:420px;border-radius:22px;}
+  .learning-v2-node{width:140px;min-height:0;padding:14px 12px;border-radius:14px;}
+  .learning-v2-node span{font-size:.58rem;margin-bottom:10px;}
+  .learning-v2-node strong{font-size:.76rem;margin-bottom:4px;}
+  .learning-v2-node small{font-size:.6rem;}
+  .learning-v2-flowline{left:8%;right:8%;}
+  .learning-v2-node--read{left:4%;top:14%;}
+  .learning-v2-node--learn{left:18%;top:54%;}
+  .learning-v2-node--build{left:50%;transform:translateX(-50%);top:14%;}
+  .learning-v2-node--implement{left:58%;top:54%;}
+  .learning-v2-node--guided{right:4%;top:14%;}
+  .learning-v2-caption{font-size:.56rem;bottom:5%;}
+}
