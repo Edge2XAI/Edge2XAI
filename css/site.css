@@ -4783,3 +4783,29 @@ body{background:#fff;}
     background:linear-gradient(135deg,#062e60,#0874b3);
   }
 }
+
+/* ============================================================
+   Phone fixes — wide banner, Connect hub overlap, hero line behind cards
+   ============================================================ */
+/* The 1495x190 banner carries small text, so on phones it scrolls sideways at a readable size */
+@media(max-width:760px){
+  .edgeverse-v5-hero-visual,.edgeverse-v3-visual{
+    min-width:0;max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+  }
+  .edgeverse-v5-hero-visual img,.edgeverse-v3-visual img{width:auto;min-width:880px;max-width:none;height:auto;}
+}
+/* Connect hero: keep the centre hub clear of the side pills at every width below desktop */
+@media(max-width:1050px){
+  .connect-v2-center{width:96px;height:96px;font-size:.7rem;}
+  .connect-v2-node{padding:8px 12px;font-size:.62rem;}
+  .connect-v2-node.c3{left:5%;}
+  .connect-v2-node.c4{right:5%;}
+}
+/* Learning and Training heroes on phones: solid cards so the vertical line passes behind them */
+@media(max-width:760px){
+  .learning-v2-flowline{z-index:1;}
+  .learning-v2-node{background:linear-gradient(145deg,rgba(9,28,56,.97),rgba(18,46,80,.95));}
+  .training-v4-path{z-index:1;}
+  .training-v4-stage{background:linear-gradient(145deg,rgba(44,16,84,.97),rgba(66,26,106,.95));}
+}
