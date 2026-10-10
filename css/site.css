@@ -4440,3 +4440,18 @@ body{background:#fff;}
 .advisory-vs-mentorship strong,.training-vs-advisory strong{color:#082f61;}
 .advisory-vs-mentorship a,.training-vs-advisory a{color:#1c63c9;}
 .training-vs-advisory{margin:0 0 18px;}
+
+/* ============================================================
+   Mobile fixes — Books card overflow, Learning hero stack spacing
+   ============================================================ */
+.knowledge-book-paths{grid-template-columns:minmax(0,1fr);}
+.knowledge-book-path{min-width:0;}
+@media(max-width:760px){
+  .knowledge-book-path{padding:24px!important;}
+  .learning-v2-visual{min-height:800px;}
+  .learning-v2-node--read{top:4%;}
+  .learning-v2-node--learn{top:23%;}
+  .learning-v2-node--build{top:42%;}
+  .learning-v2-node--implement{top:61%;}
+  .learning-v2-node--guided{top:80%;}
+}
