@@ -4568,3 +4568,10 @@ body{background:#fff;}
   footer a,.about-links a,.text-link,.wordmark{display:inline-flex;align-items:center;min-height:40px;}
   footer li{margin:0;}
 }
+
+/* Advisory diagram: extra height so the risk tag clears the bottom cards after the label-size bump */
+@media(min-width:1051px){
+  .advisory-v6-visual{min-height:500px;}
+  .advisory-v6-node--tradeoffs,.advisory-v6-node--next{top:64%;}
+  .advisory-v6-tag--risk{bottom:2%;}
+}
