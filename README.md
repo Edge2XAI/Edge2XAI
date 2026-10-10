@@ -1,37 +1,27 @@
 # Edge2XAI Website
 
-Git-ready static website baseline.
+Static website for [edge2xai.com](https://edge2xai.com), served by GitHub Pages.
 
 ## Pages
-- `index.html` — Home
-- `books.html` — Knowledge
-- `practice.html` — Learning
-- `training.html` — Training & Mentorship
-- `edgeverse.html` — EdgeVerse
-- `advisory.html` — Advisory
-- `about.html` — About
-- `contact.html` — Connect
+- `index.html` - Home
+- `books.html` - Knowledge (books and publication roadmap)
+- `practice.html` - Learning (courses and hands-on path)
+- `training.html` - Training and mentorship
+- `edgeverse.html` - EdgeVerse (industry and academia initiative)
+- `advisory.html` - Selective advisory
+- `about.html` - About
+- `contact.html` - Connect
 
-## Visual system
-Core:
-- deep navy
-- electric blue / cyan
-- white / ice-blue glass
+## Structure
+- `css/site.css` - the single stylesheet
+- `js/menu.js` - the compact mobile menu (the only script)
+- `images/`, `covers/` - artwork and book covers
+- `CNAME` - custom domain
+- `.github/workflows/pages.yml` - deploys `main` to GitHub Pages
 
-Semantic accents:
-- teal — learning, collaboration, validated/actionable progress
-- violet — mentorship, architecture growth, advanced capability
-- amber — constraints, tradeoffs, readiness
+## Making changes
+1. Edit the HTML or `css/site.css`.
+2. When the stylesheet changes, bump the `?v=` number on its `<link>` in every page so browsers fetch the new file (browsers cache it for 10 minutes).
+3. Commit and push to `main`. The site updates in about a minute.
 
-## Deployment
-This is a static HTML/CSS site and can be served directly from a web host or static-site platform.
-
-Before publishing:
-1. open all eight pages locally;
-2. test desktop, tablet, and mobile widths;
-3. verify LinkedIn/GitHub destinations;
-4. optionally test the newsletter form with a disposable/test email;
-5. confirm mailto links open the preferred mail client;
-6. push the reviewed folder contents to the repository.
-
-See `GIT_READY_RELEASE_CHECKLIST.md` for the final smoke-test list.
+The previous version of the site is preserved at the `V1.00.00` tag.

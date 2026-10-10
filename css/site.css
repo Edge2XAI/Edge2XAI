@@ -4809,3 +4809,22 @@ body{background:#fff;}
   .training-v4-path{z-index:1;}
   .training-v4-stage{background:linear-gradient(145deg,rgba(44,16,84,.97),rgba(66,26,106,.95));}
 }
+
+/* ============================================================
+   Final polish — headline breaks, small spacing, link text colour
+   ============================================================ */
+/* Books hero: keep "Real-World EdgeAI." together rather than splitting at the hyphen */
+.knowledge-v2-copy h1 em{white-space:nowrap;}
+@media(max-width:420px){.knowledge-v2-copy h1 em{white-space:normal;}}
+/* Advisory hero: let the headline use its column instead of breaking into four short lines */
+@media(min-width:1051px){
+  .advisory-v6-copy h1{max-width:none;}
+  .advisory-v6-copy h1 em{display:block;}
+}
+/* Phones: headline sizes that never exceed the screen */
+@media(max-width:420px){
+  .advisory-v6-copy h1,.about-v2-copy h1,.connect-v2-copy h1,.training-v4-copy h1,
+  .learning-v2-copy h1,.edgeverse-v5-copy h1{max-width:none;}
+}
+/* Books hero: remove the 12ch cap that left "to" alone on a line; two balanced lines instead */
+.knowledge-v2-copy h1{max-width:none;font-size:clamp(2.2rem,3.9vw,3.7rem);}
