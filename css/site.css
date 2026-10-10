@@ -9,7 +9,7 @@
   --accent-violet:#927cff;
   --accent-amber:#ffb958;
 
-  --ink:#171c22; --ink-soft:#56616d; --ink-faint:#7a8590;
+  --ink:#171c22; --ink-soft:#56616d; --ink-faint:#5f6b77;
   --paper:#f7f8fa; --surface:#ffffff; --surface-2:#eef1f3;
   --line:#dce2e7; --line-strong:#c7ced4;
   --copper:#1769e0; --copper-strong:#0f52b5; --copper-tint:#e4edfb;
@@ -1484,7 +1484,7 @@ body{background:#fff;}
 #signals.transfer-section{background:#fff;}
 #books{background:linear-gradient(180deg,#f7fbff,#eef7fd);}
 #about{background:#fff;}
-.section-head .eyebrow{color:#087fc6;}
+.section-head .eyebrow{color:#0670b0;}
 .section-head h2{color:#0a315e;}
 
 /* Pattern/domain cards: generated imagery is already text-aware; present as bright cards rather than dark photo tiles. */
@@ -2017,7 +2017,7 @@ body{background:#fff;}
 .knowledge-publications .eyebrow,
 .roadmap-section .eyebrow,
 .knowledge-base-section .eyebrow{
-  color:#087fc6;
+  color:#0670b0;
 }
 
 /* Learning journey becomes glassy, less spreadsheet-like. */
@@ -2085,7 +2085,7 @@ body{background:#fff;}
 }
 .knowledge-path-label{
   border-radius:999px;
-  color:#087fc6;
+  color:#0670b0;
   border-color:#bcdff4;
   background:#eef9ff;
 }
@@ -2344,7 +2344,7 @@ body{background:#fff;}
 .reference-project-section .eyebrow,
 .learning-portability .eyebrow,
 .mentorship-section .eyebrow,
-.future-learning-section .eyebrow{color:#087fc6;}
+.future-learning-section .eyebrow{color:#0670b0;}
 
 /* Product ladder: each step gets a purposeful accent. */
 .learning-ladder{
@@ -2366,7 +2366,7 @@ body{background:#fff;}
 .learning-level:nth-child(4)::before{background:var(--learn-violet);}
 .learning-level:nth-child(5)::before{background:var(--learn-amber);}
 .learning-level-current{box-shadow:0 20px 42px -32px rgba(8,110,181,.52);}
-.learning-level-num{color:#087fc6;}
+.learning-level-num{color:#0670b0;}
 .learning-level:nth-child(2) .learning-level-num,
 .learning-level:nth-child(3) .learning-level-num{color:#12a995;}
 .learning-level:nth-child(4) .learning-level-num{color:#7666e8;}
@@ -2652,7 +2652,7 @@ body{background:#fff;}
 .training-independence h2,.training-availability h2{color:#0a315e;}
 .training-distinction .eyebrow,.training-audience .eyebrow,.training-formats .eyebrow,
 .training-technical .eyebrow,.training-career .eyebrow,.training-journeys .eyebrow,
-.training-independence .eyebrow,.training-availability .eyebrow{color:#087fc6;}
+.training-independence .eyebrow,.training-availability .eyebrow{color:#0670b0;}
 
 /* Training vs mentorship: intentionally distinct. */
 .training-compare{gap:20px;}
@@ -2674,7 +2674,7 @@ body{background:#fff;}
 .training-compare article:last-child::before{background:linear-gradient(90deg,#7c6bed,#b39fff);}
 .training-v3-status{
   padding:6px 9px;border-radius:999px;
-  border:1px solid #cde4f2;background:#f6fbff;color:#087fc6;
+  border:1px solid #cde4f2;background:#f6fbff;color:#0670b0;
 }
 .training-compare article:last-child .training-v3-status{
   border-color:#ddd5fb;background:#faf8ff;color:#6f5fd1;
@@ -2700,7 +2700,7 @@ body{background:#fff;}
 .training-audience-grid article>span{
   width:38px;height:38px;border-radius:12px;
   display:flex;align-items:center;justify-content:center;
-  background:#eef9ff;border:1px solid #cde5f4;color:#087fc6;
+  background:#eef9ff;border:1px solid #cde5f4;color:#0670b0;
 }
 .training-audience-grid h3{color:#0a315e;}
 
@@ -2799,7 +2799,7 @@ body{background:#fff;}
 .training-availability-grid article:nth-child(4){
   border-color:#ddd7f6;background:linear-gradient(145deg,#fff,#f7f5ff);
 }
-.training-availability-grid span{color:#087fc6;}
+.training-availability-grid span{color:#0670b0;}
 .training-availability-grid article:nth-child(4) span{color:#7665d8;}
 .training-availability-grid strong{color:#0a315e;}
 
@@ -2895,7 +2895,7 @@ body{background:#fff;}
 .edgeverse-v4-ecosystem h2,.edgeverse-v4-expansion h2{color:#0a315e;}
 .edgeverse-v4-why .eyebrow,.edgeverse-v4-focus .eyebrow,.edgeverse-v4-audience .eyebrow,
 .edgeverse-v4-programs .eyebrow,.edgeverse-v4-career .eyebrow,.edgeverse-v4-academic .eyebrow,
-.edgeverse-v4-sponsored .eyebrow,.edgeverse-v4-ecosystem .eyebrow,.edgeverse-v4-expansion .eyebrow{color:#087fc6;}
+.edgeverse-v4-sponsored .eyebrow,.edgeverse-v4-ecosystem .eyebrow,.edgeverse-v4-expansion .eyebrow{color:#0670b0;}
 
 /* Why EdgeVerse bridge becomes a glass system, not plain boxes. */
 .edgeverse-v4-bridge-model{
@@ -2917,7 +2917,7 @@ body{background:#fff;}
     radial-gradient(circle at 12% 10%,rgba(146,124,255,.09),transparent 25%),
     linear-gradient(145deg,#fff,#f8f6ff);
 }
-.edgeverse-v4-side>span{color:#087fc6;}
+.edgeverse-v4-side>span{color:#0670b0;}
 .edgeverse-v4-side:first-child>span{color:#7465d5;}
 .edgeverse-v4-center{
   border-radius:15px;
@@ -2958,7 +2958,7 @@ body{background:#fff;}
 .edgeverse-v4-audience-grid article:last-child::before{
   background:linear-gradient(90deg,#0e96d9,#2dd8c2);
 }
-.edgeverse-v4-audience-grid article>span{color:#087fc6;}
+.edgeverse-v4-audience-grid article>span{color:#0670b0;}
 .edgeverse-v4-audience-grid article:first-child>span{color:#7161cf;}
 .edgeverse-v4-audience-grid h3{color:#0a315e;}
 
@@ -2982,7 +2982,7 @@ body{background:#fff;}
 .edgeverse-v4-program-grid article:nth-child(6)::before{background:var(--ev-amber);}
 .edgeverse-v4-status{
   padding:6px 9px;border-radius:999px;
-  border:1px solid #cee4f2;background:#f6fbff;color:#087fc6;
+  border:1px solid #cee4f2;background:#f6fbff;color:#0670b0;
 }
 .edgeverse-v4-program-grid h3{color:#0a315e;}
 
@@ -3043,7 +3043,7 @@ body{background:#fff;}
     linear-gradient(145deg,#fff,#fff9ef);
   border-color:#f0dbb8;
 }
-.edgeverse-v4-academic-flow>div>span{color:#087fc6;}
+.edgeverse-v4-academic-flow>div>span{color:#0670b0;}
 .edgeverse-v4-academic-flow>b{color:#1aa8d9;}
 
 /* Sponsored future collaboration */
@@ -3216,7 +3216,7 @@ body{background:#fff;}
 .advisory-v5-principle h2,.advisory-v5-engagements h2,.advisory-v5-fit h2,
 .advisory-v5-process h2,.advisory-v5-flywheel h2{color:#0a315e;}
 .advisory-v5-principle .eyebrow,.advisory-v5-engagements .eyebrow,.advisory-v5-fit .eyebrow,
-.advisory-v5-process .eyebrow,.advisory-v5-flywheel .eyebrow{color:#087fc6;}
+.advisory-v5-process .eyebrow,.advisory-v5-flywheel .eyebrow{color:#0670b0;}
 
 /* Selective by design */
 .advisory-v5-principle .advisory-v5-split>div:last-child{
@@ -3242,7 +3242,7 @@ body{background:#fff;}
 .advisory-v5-grid article:nth-child(2)::before{background:linear-gradient(90deg,#0c93d8,#69c7f0);}
 .advisory-v5-grid article:nth-child(3)::before{background:linear-gradient(90deg,#ffb958,#ff8d66);}
 .advisory-v5-grid article:nth-child(4)::before{background:linear-gradient(90deg,#2dd8c2,#76e8d8);}
-.advisory-v5-grid article>span{color:#087fc6;}
+.advisory-v5-grid article>span{color:#0670b0;}
 .advisory-v5-grid article:nth-child(3)>span{color:#b87417;}
 .advisory-v5-grid h3{color:#0a315e;}
 
@@ -3296,7 +3296,7 @@ body{background:#fff;}
 .advisory-v5-process-grid article:nth-of-type(3)::before{background:#ffb958;}
 .advisory-v5-process-grid article:nth-of-type(4)::before{background:#0e98d9;}
 .advisory-v5-process-grid article:nth-of-type(5)::before{background:#2dd8c2;}
-.advisory-v5-process-grid article>span{color:#087fc6;}
+.advisory-v5-process-grid article>span{color:#0670b0;}
 .advisory-v5-process-grid article:nth-of-type(3)>span{color:#b87417;}
 .advisory-v5-process-grid h3{color:#0a315e;}
 .advisory-v5-process-grid>b{color:#139bdc;}
@@ -4525,4 +4525,46 @@ body{background:#fff;}
   .about-v2-node.n4{right:5%;left:auto;top:66%;bottom:auto}
   .about-v2-node.n5{left:5%;right:auto;top:75%;bottom:auto}
   .about-v2-node.n6{right:5%;left:auto;top:84%;bottom:auto}
+}
+
+/* ============================================================
+   Readability pass — contrast, minimum text size, line length, tap targets
+   ============================================================ */
+/* Primary buttons: white text needs >= 4.5:1, so the gradient ends are darker */
+.site .btn-primary{
+  background:linear-gradient(135deg,#0a62b8,#0b78c8);
+  border-color:#0a62b8;
+}
+#contact .contact-band .btn-primary,
+.roadmap-feedback .btn-primary{
+  background:linear-gradient(135deg,#0a62b8,#0b78c8);
+  border-color:#4fb0ee;
+}
+/* Advisory hero button sits on a teal gradient, so it takes dark text like the other heroes */
+.advisory-v6-hero .btn-primary{color:#04203f;border-color:#1ebfd0;}
+/* Muted paragraphs on dark bands */
+.roadmap-feedback p{color:#e3edf5;}
+.edgeverse-v4-workshop-grid p{color:#d6e2ec;}
+.edgeverse-v4-note{color:#44566a;}
+.footer-heading,footer .footer-heading{color:#5f6b77;}
+
+/* Diagram labels were shrunk to ~9px in the compact hero pass; restore a readable floor */
+@media(min-width:1051px){
+  .advisory-v6-node span,.training-v4-stage span,.learning-v2-node span{font-size:.64rem;}
+  .advisory-v6-node small,.training-v4-stage small,.learning-v2-node small{font-size:.68rem;}
+  .advisory-v6-node strong,.training-v4-stage strong,.learning-v2-node strong{font-size:.8rem;}
+  .advisory-v6-tag,.training-v4-feedback{font-size:.62rem;}
+  .about-v2-node{font-size:.68rem;}
+  .about-v2-caption,.training-v4-caption,.learning-v2-caption{font-size:.64rem;}
+}
+
+/* Line length: keep running text to a comfortable measure */
+.advisory-vs-mentorship,.training-vs-advisory{max-width:72ch;}
+.opp-note{max-width:78ch;}
+.edgeverse-v5-copy .lead{max-width:720px;}
+
+/* Tap targets on phones: footer and inline text links */
+@media(max-width:760px){
+  footer a,.about-links a,.text-link,.wordmark{display:inline-flex;align-items:center;min-height:40px;}
+  footer li{margin:0;}
 }
