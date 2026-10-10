@@ -4667,3 +4667,58 @@ body{background:#fff;}
 .learning-v2-node{background:linear-gradient(145deg,rgba(8,26,52,.62),rgba(20,48,82,.44));}
 .roadmap-feedback p{color:#f4f8fb!important;}
 .roadmap-feedback{background-image:linear-gradient(135deg,#052a55,#073f78 60%,#0a5a96)!important;}
+
+/* ============================================================
+   Home — restore the application/domain card grid (rules were missing)
+   ============================================================ */
+.transfer-group{margin-top:48px;}
+.transfer-group--domains{margin-top:68px;padding-top:48px;border-top:1px solid #dceaf4;}
+.transfer-group-head{
+  display:grid;grid-template-columns:1fr .8fr;gap:44px;align-items:end;margin-bottom:22px;
+}
+.transfer-kicker{
+  display:block;margin-bottom:9px;color:#0670b0;
+  font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.08em;
+}
+.transfer-group-head h3{font-size:clamp(1.35rem,2.4vw,1.95rem);margin:0;}
+.transfer-group-head>p{color:#4a6076;font-size:.88rem;line-height:1.6;margin:0;}
+.transfer-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.transfer-card{position:relative;overflow:hidden;border:1px solid #d7e8f5;border-radius:14px;}
+@media(max-width:900px){
+  .transfer-cards{grid-template-columns:1fr 1fr;}
+  .transfer-group-head{grid-template-columns:1fr;gap:10px;}
+}
+@media(max-width:650px){
+  .transfer-cards{grid-template-columns:1fr;}
+  .transfer-card{min-height:320px;}
+}
+/* Cards stack the (text-bearing) artwork above the copy so the two never overlap */
+.transfer-card img{position:static;display:block;width:100%;height:auto;aspect-ratio:490/145;object-fit:cover;}
+.transfer-card::after{display:none;}
+.transfer-card-copy{position:static;width:auto;padding:18px 20px 22px;}
+.transfer-card-copy>span{display:block;margin-bottom:8px;font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.07em;}
+.transfer-card-copy h4{margin:0 0 8px;}
+.transfer-card-copy p{line-height:1.55;margin:0;}
+.transfer-card{min-height:0;}
+
+/* ============================================================
+   Paragraph rhythm — consecutive paragraphs in split sections had no gap
+   ============================================================ */
+.about-final-grid>div p+p,
+.advisory-v5-split>div p+p,
+.edgeverse-v4-split>div p+p,
+.training-v3-split>div p+p,
+.learning-principle-grid>div p+p,
+.hardware-guide-grid>div p+p,
+.reference-project-grid>div p+p,
+.learning-portability-grid>div p+p,
+.contact-final-direct-grid>div p+p{margin-top:1em;}
+
+/* Advisory flow chips: tighter so the five steps stay on as few lines as possible */
+.advisory-v5-chain{gap:6px 7px;}
+.advisory-v5-chain span{padding:6px 9px;font-size:.68rem;}
+.advisory-v5-chain b{margin:0 1px;}
+@media(min-width:900px){
+  .advisory-v5-chain{display:grid;grid-template-columns:repeat(9,auto);justify-content:start;align-items:center;gap:6px;}
+  .advisory-v5-chain span{white-space:nowrap;}
+}
