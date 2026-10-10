@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=4">
+<link rel="stylesheet" href="css/site.css?v=19">
 
 
 <link rel="canonical" href="https://edge2xai.com/edgeverse.html">
@@ -27,13 +27,14 @@
 <meta name="twitter:description" content="EdgeVerse connects engineering education with current Embedded Systems and EdgeAI industry practice through seminars, workshops, career roadmaps, and academic collaboration.">
 <meta name="twitter:image" content="https://edge2xai.com/images/home-hero-glassy-master.webp">
 
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site">
   <div class="wrap nav-row">
     <a href="index.html" class="wordmark"><span class="dot"></span>edge2xai</a>
-    <nav class="primary" aria-label="Primary navigation">
+    <nav class="primary" id="primary-nav" aria-label="Primary navigation">
       <a href="books.html">Knowledge</a>
       <a href="practice.html">Learning</a>
       <a href="edgeverse.html" aria-current="page">EdgeVerse</a>
@@ -41,6 +42,7 @@
       <a href="about.html">About</a>
     </nav>
     <a class="btn btn-primary" href="contact.html">Connect</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -388,5 +390,6 @@
     </div>
   </div>
 </footer>
+<script src="js/menu.js?v=19" defer></script>
 </body>
 </html>
