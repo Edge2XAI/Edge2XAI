@@ -4196,3 +4196,55 @@ body{background:#fff;}
   .training-formats-grid.training-formats-grid--4{grid-template-columns:1fr;}
   .training-now{grid-template-columns:1fr;}
 }
+
+/* ============================================================
+   Connect — "what to include" block, compact hero, signal palette
+   (hero rules scoped to .connect-v2-*; About hero unaffected)
+   ============================================================ */
+.contact-include{
+  margin-top:26px;padding:20px 22px;border-radius:14px;
+  border:1px solid #cfe0ee;background:linear-gradient(145deg,#fff,#f3f9fd);
+}
+.contact-include strong{display:block;color:#082f61;font-size:.98rem;margin-bottom:10px;}
+.contact-include ul{margin:0;padding-left:1.1rem;color:#3e5f7c;font-size:.88rem;line-height:1.65;}
+.contact-include li{margin-bottom:6px;}
+.contact-include b{color:#0a315e;}
+
+.connect-v2-hero{
+  padding:clamp(48px,5vw,70px) 0;
+  background:
+    radial-gradient(circle at 84% 22%,rgba(255,214,90,.22),transparent 26%),
+    radial-gradient(circle at 10% 90%,rgba(60,160,255,.30),transparent 30%),
+    radial-gradient(circle at 55% 0%,rgba(90,120,255,.28),transparent 38%),
+    linear-gradient(150deg,#050f2c 0%,#0a2260 52%,#0f3a8f 100%);
+}
+.connect-v2-copy .eyebrow{color:#ffd65a;}
+.connect-v2-copy h1{
+  max-width:none;
+  font-size:clamp(1.9rem,3.5vw,3.3rem);
+  line-height:1.05;margin-bottom:16px;
+}
+.connect-v2-copy h1 em{
+  background:linear-gradient(90deg,#ffd65a 0%,#ffb25a 45%,#7fd6ff 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.connect-v2-copy .lead{max-width:600px;font-size:.95rem;line-height:1.65;}
+.connect-v2-router{
+  border-color:rgba(160,200,255,.34);
+  background:
+    radial-gradient(circle at 50% 50%,rgba(255,214,90,.16),transparent 30%),
+    linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.04));
+}
+.connect-v2-center{
+  background:radial-gradient(circle at 35% 30%,#ffe58a,#f2a93b 55%,#a85d0a);
+  border-color:rgba(255,225,150,.65);box-shadow:0 0 48px rgba(255,200,80,.34);
+  color:#2a1500;
+}
+.connect-v2-node{background:rgba(5,24,70,.72);border-color:rgba(160,200,255,.36);}
+.connect-v2-node:hover{border-color:#ffd65a;color:#fff;}
+@media(min-width:1051px){
+  .connect-v2-hero-grid{grid-template-columns:1fr .8fr;}
+  .connect-v2-router{max-width:470px;width:100%;justify-self:end;min-height:340px;border-radius:22px;}
+  .connect-v2-center{width:96px;height:96px;font-size:.7rem;}
+  .connect-v2-node{padding:8px 12px;font-size:.62rem;}
+}
