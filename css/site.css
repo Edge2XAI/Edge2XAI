@@ -4494,3 +4494,35 @@ body{background:#fff;}
   .js .site .btn{font-size:.78rem;padding:9px 14px;}
 }
 @media(prefers-reduced-motion:reduce){.nav-toggle span{transition:none!important;}}
+
+/* ============================================================
+   Contrast fixes — headings that inherited navy on dark bands
+   ============================================================ */
+.about-final-thesis .section-head h2,
+.contact-final-expectations .section-head h2,
+.edgeverse-v4-workshops .section-head h2{color:#fff;}
+.contact-final-expectations .eyebrow{color:#72e8d7;}
+.contact-final-note{color:#c3d3e0;}
+.edgeverse-v4-workshop-grid article:nth-child(3)>span{color:#d2c8ff;}
+.about-final-thesis .section-head p{color:#d3e6f2;}
+
+/* About hero diagram — application-level labels (longer than before) */
+@media(min-width:1051px){
+  .about-v2-node.n1{left:6%;top:15%}
+  .about-v2-node.n2{right:6%;top:15%}
+  .about-v2-node.n3{left:5%;top:47%}
+  .about-v2-node.n4{right:5%;top:47%}
+  .about-v2-node.n5{left:8%;bottom:17%}
+  .about-v2-node.n6{right:8%;bottom:17%}
+}
+
+/* About diagram on phones: two stacks of three labels around the core */
+@media(max-width:760px){
+  .about-v2-visual{min-height:560px;}
+  .about-v2-node.n1{left:5%;right:auto;top:4%;bottom:auto}
+  .about-v2-node.n2{right:5%;left:auto;top:14%;bottom:auto}
+  .about-v2-node.n3{left:5%;right:auto;top:24%;bottom:auto}
+  .about-v2-node.n4{right:5%;left:auto;top:66%;bottom:auto}
+  .about-v2-node.n5{left:5%;right:auto;top:75%;bottom:auto}
+  .about-v2-node.n6{right:5%;left:auto;top:84%;bottom:auto}
+}
