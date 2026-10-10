@@ -4326,3 +4326,37 @@ body{background:#fff;}
 @media(max-width:560px){
   .home-v6-strip{grid-template-columns:1fr;}
 }
+
+/* ============================================================
+   Books — 2026 plan strip (three books, then ready-to-use Git projects)
+   ============================================================ */
+.plan-2026{
+  list-style:none;margin:6px 0 30px;padding:0;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+}
+.plan-2026 li{
+  position:relative;padding:18px 18px 16px;border-radius:16px;
+  border:1px solid #cfe0ee;background:linear-gradient(145deg,#fff,#f3f9fd);
+  box-shadow:0 18px 38px -32px rgba(10,60,120,.4);
+}
+.plan-2026 li::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:4px;border-radius:16px 16px 0 0;
+  background:linear-gradient(90deg,#1c83e7,#5d72ff);
+}
+.plan-2026 span{
+  display:block;margin-bottom:8px;color:#5b5be0;
+  font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;
+}
+.plan-2026 strong{display:block;color:#082f61;font-size:1.02rem;margin-bottom:4px;}
+.plan-2026 small{display:block;color:#3e5f7c;font-size:.8rem;}
+.plan-2026-book:nth-child(2)::before{background:linear-gradient(90deg,#0c9b86,#35c7b0);}
+.plan-2026-book--tba{border-style:dashed;background:linear-gradient(145deg,#fbfdff,#f5f8fc);}
+.plan-2026-book--tba::before{background:linear-gradient(90deg,#b8c6d6,#d3dde8);}
+.plan-2026-book--tba strong{color:#4a6a86;}
+.plan-2026-git{
+  border-color:#e6d6f5;background:radial-gradient(circle at 90% 10%,rgba(150,100,255,.12),transparent 30%),linear-gradient(145deg,#fff,#f8f5ff);
+}
+.plan-2026-git::before{background:linear-gradient(90deg,#8f43ef,#ff8fb8);}
+.plan-2026-git span{color:#8f43ef;}
+@media(max-width:1000px){.plan-2026{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.plan-2026{grid-template-columns:1fr;}}
