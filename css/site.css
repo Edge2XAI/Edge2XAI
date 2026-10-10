@@ -4170,3 +4170,29 @@ body{background:#fff;}
   .training-v4-feedback--b{left:50%;transform:translateX(-50%);top:82%;}
   .training-v4-caption{font-size:.56rem;padding:6px 10px;bottom:4%;}
 }
+
+/* ============================================================
+   Training — byline, sequence roadmap, "available now" callout
+   ============================================================ */
+.training-v4-byline{margin:14px 0 0;max-width:600px;font-size:.84rem;line-height:1.6;color:#e3d4f5;}
+.training-v4-byline a{color:#ffd0a0;border-bottom:1px solid rgba(255,208,160,.5);text-decoration:none;}
+.training-formats-grid.training-formats-grid--4{grid-template-columns:repeat(4,1fr);}
+.training-formats-grid.training-formats-grid--4 article:nth-child(1)::before{background:#168fd3;}
+.training-formats-grid.training-formats-grid--4 article:nth-child(2)::before{background:var(--mentor-teal);}
+.training-formats-grid.training-formats-grid--4 article:nth-child(3)::before{background:var(--mentor-violet);}
+.training-formats-grid.training-formats-grid--4 article:nth-child(4)::before{background:linear-gradient(90deg,var(--mentor-violet),var(--mentor-warm));}
+.training-now{
+  display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;
+  margin-top:22px;padding:22px 26px;border-radius:16px;
+  border:1px solid #f0d6e6;
+  background:radial-gradient(circle at 92% 10%,rgba(255,120,180,.14),transparent 30%),linear-gradient(145deg,#fff,#fff6fa);
+  box-shadow:0 18px 40px -32px rgba(120,30,90,.4);
+}
+.training-now strong{display:block;color:#3a1252;font-size:1.02rem;margin-bottom:4px;}
+.training-now p{margin:0;color:#5b4a6e;font-size:.88rem;line-height:1.6;}
+.training-now .training-v3-status{border-color:#f3c3dc;background:#fff0f7;color:#b8326f;}
+@media(max-width:1000px){.training-formats-grid.training-formats-grid--4{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:760px){
+  .training-formats-grid.training-formats-grid--4{grid-template-columns:1fr;}
+  .training-now{grid-template-columns:1fr;}
+}
