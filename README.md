@@ -6,6 +6,7 @@ Static website for [edge2xai.com](https://edge2xai.com), served by GitHub Pages.
 - `index.html` - Home
 - `books.html` - Knowledge (books and publication roadmap)
 - `practice.html` - Learning (courses and hands-on path)
+- `guide.html` - The Embedded Engineer's Guide to Edge AI (book page; uses `css/guide.css`)
 - `training.html` - Training and mentorship
 - `edgeverse.html` - EdgeVerse (industry and academia initiative)
 - `advisory.html` - Selective advisory

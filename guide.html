@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Embedded Engineer's Guide to Edge AI — Edge2XAI</title>
+<meta name="description" content="A book for embedded engineers adding machine learning to real products: six handoffs, one reference system, 14 chapters from product requirement to field update. By Satheesh Gannoju. Launching November 4, 2026.">
+<meta name="theme-color" content="#0b1016">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css?v=35">
+<link rel="stylesheet" href="css/guide.css?v=1">
+<link rel="canonical" href="https://edge2xai.com/guide.html">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="shortcut icon" href="favicon.ico">
+<meta property="og:type" content="book">
+<meta property="og:site_name" content="Edge2XAI">
+<meta property="og:title" content="The Embedded Engineer's Guide to Edge AI">
+<meta property="og:description" content="The method for taking machine learning from a physical signal to a product that survives the field. By Satheesh Gannoju. Launching November 4, 2026.">
+<meta property="og:url" content="https://edge2xai.com/guide.html">
+<meta property="og:image" content="https://edge2xai.com/images/og-guide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="book:author" content="Satheesh Gannoju">
+<meta property="book:isbn" content="9798982285508">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Embedded Engineer's Guide to Edge AI">
+<meta name="twitter:description" content="The method for taking machine learning from a physical signal to a product that survives the field.">
+<meta name="twitter:image" content="https://edge2xai.com/images/og-guide.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","name":"The Embedded Engineer's Guide to Edge AI","alternateName":"From Physical Signals and Data to Learned Behavior, Deployment, and Verification","author":{"@type":"Person","name":"Satheesh Gannoju"},"publisher":{"@type":"Organization","name":"Edge2XAI Publications"},"inLanguage":"en","isbn":"9798982285508","url":"https://edge2xai.com/guide.html","image":"https://edge2xai.com/covers/book1-cover.webp","numberOfPages":347,"bookFormat":"https://schema.org/Paperback"}</script>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="index.html" class="wordmark"><span class="dot"></span>edge2xai</a>
+    <nav class="primary" id="primary-nav" aria-label="Primary navigation">
+      <a href="books.html" aria-current="page">Knowledge</a>
+      <a href="practice.html">Learning</a>
+      <a href="edgeverse.html">EdgeVerse</a>
+      <a href="advisory.html">Advisory</a>
+      <a href="about.html">About</a>
+    </nav>
+    <a class="btn btn-primary" href="contact.html">Connect</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <section class="g-hero" aria-labelledby="g-title">
+    <div class="wrap g-hero-grid">
+      <div>
+        <p class="breadcrumb"><a href="index.html">Home</a> / <a href="books.html">Knowledge</a> / The Guide to Edge AI</p>
+        <span class="g-chip">New book &middot; Launching November 4, 2026</span>
+        <h1 id="g-title">The Embedded Engineer&rsquo;s Guide to <em>Edge AI</em></h1>
+        <p class="g-sub">From Physical Signals and Data to Learned Behavior, Deployment, and Verification</p>
+        <p class="g-promise">You already know how to build products that survive the real world. This book shows how to keep that discipline when a machine-learning model joins the product.</p>
+        <div class="g-actions">
+          <a class="btn btn-primary" href="#get-the-book">Get the book</a>
+          <a class="btn btn-ghost" href="#checklist">Free handoff checklist</a>
+        </div>
+        <p class="g-note">By Satheesh Gannoju &middot; 347 pages &middot; Paperback and Kindle</p>
+      </div>
+      <figure class="g-cover"><img src="covers/book1-cover.webp" alt="Cover of The Embedded Engineer's Guide to Edge AI by Satheesh Gannoju" width="760" height="1140"></figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="g-problem-h">
+    <div class="wrap g-problem">
+      <div>
+        <p class="eyebrow">The problem</p>
+        <h2 id="g-problem-h">The model was good. The firmware was correct. The product still failed.</h2>
+        <p>Most Edge AI books teach you to run a model on a board. This one starts where embedded engineers actually get hurt: the places where two correct pieces do not fit together once they are in the field.</p>
+      </div>
+      <blockquote>Don&rsquo;t integrate the model at the end.<span>Integrate the lifecycles from the beginning.</span></blockquote>
+    </div>
+  </section>
+
+  <section aria-labelledby="g-six-h">
+    <div class="wrap">
+      <div class="g-section-head">
+        <p class="eyebrow">The method</p>
+        <h2 id="g-six-h">Six handoffs decide whether an EdgeAI product works.</h2>
+        <p>Between the embedded side and the ML/data side there are six places where a product quietly breaks. Each handoff leaves behind one written artifact, and each ends in an exit gate you can ask in a design review.</p>
+      </div>
+      <ol class="g-six"><li><b>H1</b><strong>Product ↔ ML problem</strong><span>Are we solving the right product problem with ML?</span></li><li><b>H2</b><strong>Data ↔ training</strong><span>Does the data represent the product world we claim to support?</span></li><li><b>H3</b><strong>Model input ↔ firmware</strong><span>Will production software create exactly what the model expects?</span></li><li><b>H4</b><strong>Model ↔ deployment target</strong><span>Can learned behavior fit the target without unacceptable loss?</span></li><li><b>H5</b><strong>Model output ↔ product policy</strong><span>How does learned evidence become defined product behavior?</span></li><li><b>H6</b><strong>Field behavior ↔ controlled change</strong><span>How does field evidence become a traceable, verifiable change?</span></li></ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="g-do-h">
+    <div class="wrap">
+      <div class="g-section-head"><p class="eyebrow">What you will be able to do</p><h2 id="g-do-h">Practical skills, taken one product decision at a time.</h2></div>
+      <ul class="g-do"><li>Decide whether a problem needs machine learning at all, and defend the answer</li><li>Turn sensor signals into a specified, versioned model input</li><li>Prove that firmware and training agree, with a golden-vector test</li><li>Read quantization, tensor-arena and operator choices as architecture decisions</li><li>Fit inference into an existing RTOS product without breaking what already works</li><li>Define thresholds, persistence and "not assessed" states so behavior is predictable</li><li>Build the evidence that supports a production release</li><li>Diagnose a field problem before anyone retrains the model</li></ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="g-inside-h">
+    <div class="wrap">
+      <div class="g-section-head">
+        <p class="eyebrow">Inside the book</p>
+        <h2 id="g-inside-h">Fourteen chapters in four parts, built on one reference system.</h2>
+        <p>A multi-sensor machine-monitoring node (vibration, current, temperature and RPM/load) carries every chapter, with worked numbers, 28 figures, review questions and checklists. The examples are teaching examples; the method is the point.</p>
+      </div>
+      <div class="g-parts"><div class="g-part"><h3>Part I</h3><h4>See the Product Differently</h4><ol><li><b>1</b>The System Worked. The Machine Still Failed.</li><li><b>2</b>Six Critical Embedded↔ML Handoffs</li><li><b>3</b>Before You Train the Model</li></ol></div><div class="g-part"><h3>Part II</h3><h4>Data, Signals, and Learned Behavior</h4><ol><li><b>4</b>Data Becomes Part of the Product</li><li><b>5</b>From Sensor Signal to Model Input</li><li><b>6</b>From Model Input to Trained Model</li></ol></div><div class="g-part"><h3>Part III</h3><h4>Turn the Model Into an Embedded Product</h4><ol><li><b>7</b>From Trained Model to Deployment-Ready Model</li><li><b>8</b>From Deployment Model to Inference</li><li><b>9</b>From Inference to Embedded Product</li><li><b>10</b>From Model Output to Product Decision</li></ol></div><div class="g-part"><h3>Part IV</h3><h4>Prove, Operate, and Evolve the Product</h4><ol><li><b>11</b>From Working System to Production Evidence</li><li><b>12</b>From Production to Field Insight</li><li><b>13</b>From Field Evidence to Controlled Evolution</li><li><b>14</b>Putting the EdgeAI Engineering Method to Work</li></ol></div></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="g-for-h">
+    <div class="wrap">
+      <div class="g-section-head"><p class="eyebrow">Who it is for</p><h2 id="g-for-h">Written for engineers who ship products.</h2></div>
+      <div class="g-for">
+        <div><strong>Embedded and firmware engineers</strong><span>MCU/SoC, RTOS, drivers, sensors, memory, timing and integration.</span></div>
+        <div><strong>Technical leads and system architects</strong><span>Product boundaries, partitioning, interfaces, verification and lifecycle.</span></div>
+        <div><strong>ML engineers in embedded products</strong><span>What changes when a model leaves the notebook and meets a real target.</span></div>
+      </div>
+      <p class="g-note" style="margin-top:20px">It assumes C/C++, MCU and RTOS basics. It does not ask you to become a machine-learning researcher.</p>
+    </div>
+  </section>
+
+  <section id="checklist" class="g-checklist" aria-labelledby="g-ck-h">
+    <div class="wrap g-wrap">
+      <div>
+        <p class="eyebrow">Free download</p>
+        <h2 id="g-ck-h">The EdgeAI Handoff Checklist</h2>
+        <p>A 16-page working tool for design reviews, drawn from the book. It works without the book.</p>
+        <ul>
+          <li>The six handoffs on one page, with exit gates</li>
+          <li>Review questions for each handoff, with section pointers</li>
+          <li>The verification ladder and the production evidence package</li>
+          <li>A field diagnostic card and a root-cause order</li>
+          <li>Twenty questions for any EdgeAI project</li>
+        </ul>
+      </div>
+      <form class="g-form" action="https://app.convertkit.com/forms/9029647/subscriptions" method="post" data-sv-form="9029647" data-uid="1c0a5ec351" data-version="5">
+        <label for="g-email">Where should we send it?</label>
+        <div class="row"><input id="g-email" type="email" name="email_address" placeholder="you@company.com" autocomplete="email" required><button type="submit">Send me the checklist</button></div>
+        <small>You will also get occasional notes on Embedded Systems and EdgeAI. Unsubscribe any time.</small>
+      </form>
+    </div>
+  </section>
+
+  <section id="get-the-book" aria-labelledby="g-get-h">
+    <div class="wrap">
+      <div class="g-section-head"><p class="eyebrow">Get the book</p><h2 id="g-get-h">Launching November 4, 2026.</h2><p>Paperback and Kindle edition on Amazon. The link goes live on launch day; join the checklist list above to be told first.</p></div>
+      <div class="g-actions" style="margin-top:0"><a class="btn btn-primary" href="#checklist">Get notified</a></div>
+      <table class="g-details" style="margin-top:30px"><tbody>
+        <tr><th>Title</th><td>The Embedded Engineer&rsquo;s Guide to Edge AI</td></tr>
+        <tr><th>Subtitle</th><td>From Physical Signals and Data to Learned Behavior, Deployment, and Verification</td></tr>
+        <tr><th>Author</th><td>Satheesh Gannoju</td></tr>
+        <tr><th>Publisher</th><td>Edge2XAI Publications</td></tr>
+        <tr><th>Paperback</th><td>347 pages, 7 &times; 10 in &middot; ISBN <code>979-8-9822855-0-8</code></td></tr>
+        <tr><th>eBook</th><td>EPUB &middot; ISBN <code>979-8-9822855-1-5</code></td></tr>
+        <tr><th>First edition</th><td>2026</td></tr>
+      </tbody></table>
+    </div>
+  </section>
+
+  <section aria-labelledby="g-au-h" style="border-bottom:none">
+    <div class="wrap g-author">
+      <img src="images/author-satheesh.webp" alt="Portrait of Satheesh Gannoju" width="400" height="400" loading="lazy">
+      <div>
+        <p class="eyebrow">About the author</p>
+        <h3 id="g-au-h">Satheesh Gannoju</h3>
+        <p class="role">Embedded systems &middot; Real-time firmware &middot; EdgeAI</p>
+        <p>Satheesh is an embedded systems engineer with nearly two decades of experience in real-time firmware, RTOS-based platforms, and system architecture across automotive and safety-critical applications. His current focus is bridging traditional embedded engineering with practical EdgeAI and on-device machine learning.</p>
+        <div class="about-links"><a href="https://www.linkedin.com/in/satheesh-g-40199719/" target="_blank" rel="noopener">LinkedIn &rarr;</a><a href="about.html">About Edge2XAI &rarr;</a><a href="contact.html">Contact &rarr;</a></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2 class="footer-heading">Edge2XAI</h2>
+        <p>Embedded Systems and EdgeAI knowledge, learning, mentorship, academic engagement, and selective technical advisory.</p>
+      </div>
+      <div>
+        <h2 class="footer-heading">Knowledge</h2>
+        <ul>
+          <li><a href="books.html#publications">Books &amp; Handbooks</a></li>
+          <li><a href="books.html#audio-package">Packaged Learning</a></li>
+          <li><a href="books.html#knowledge-base">Engineering Knowledge</a></li>
+          <li><a href="books.html#guided-learning">Guided Learning</a></li>
+        <li><a href="training.html">Mentorship</a></li></ul>
+      </div>
+      <div>
+        <h2 class="footer-heading">Connect</h2>
+        <ul>
+          <li><a href="mailto:info@edge2xai.com">info@edge2xai.com</a></li>
+          <li><a href="https://www.linkedin.com/in/satheesh-g-40199719/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/Edge2XAI/Edge2XAI" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-heading">Updates</h2>
+        <p style="margin-bottom:8px;">Occasional notes on Embedded Systems and EdgeAI.</p>
+        <form class="subscribe-row" action="https://app.convertkit.com/forms/9029647/subscriptions" method="post" data-sv-form="9029647" data-uid="1c0a5ec351" data-version="5">
+          <input id="email-input" type="email" name="email_address" placeholder="Email" aria-label="Email address" autocomplete="email" required>
+          <button type="submit">Join</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Edge2XAI. All rights reserved.</span>
+      <span>Bridging Embedded Systems and Edge Intelligence</span>
+    </div>
+  </div>
+</footer>
+<script src="js/menu.js?v=19" defer></script>
+</body>
+</html>
