@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>The Embedded Engineer's Guide to Edge AI — Edge2XAI</title>
-<meta name="description" content="A book for embedded engineers adding machine learning to real products: six handoffs, one reference system, 14 chapters from product requirement to field update. By Satheesh Gannoju. Launching November 4, 2026.">
+<meta name="description" content="For embedded engineers adding machine learning to real products: sensor pipelines, ML integration, deployment and verification, organized around six Embedded↔ML handoffs. By Satheesh Gannoju. Kindle pre-order now available; releasing November 4, 2026.">
 <meta name="theme-color" content="#0b1016">
 <meta name="color-scheme" content="light">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -11,14 +11,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css?v=35">
-<link rel="stylesheet" href="css/guide.css?v=1">
+<link rel="stylesheet" href="css/guide.css?v=2">
 <link rel="canonical" href="https://edge2xai.com/guide.html">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="shortcut icon" href="favicon.ico">
 <meta property="og:type" content="book">
 <meta property="og:site_name" content="Edge2XAI">
 <meta property="og:title" content="The Embedded Engineer's Guide to Edge AI">
-<meta property="og:description" content="The method for taking machine learning from a physical signal to a product that survives the field. By Satheesh Gannoju. Launching November 4, 2026.">
+<meta property="og:description" content="The method for taking machine learning from a physical signal to a product that survives the field. By Satheesh Gannoju. Kindle pre-order now available; releasing November 4, 2026.">
 <meta property="og:url" content="https://edge2xai.com/guide.html">
 <meta property="og:image" content="https://edge2xai.com/images/og-guide.jpg">
 <meta property="og:image:width" content="1200">
@@ -29,7 +29,7 @@
 <meta name="twitter:title" content="The Embedded Engineer's Guide to Edge AI">
 <meta name="twitter:description" content="The method for taking machine learning from a physical signal to a product that survives the field.">
 <meta name="twitter:image" content="https://edge2xai.com/images/og-guide.jpg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","name":"The Embedded Engineer's Guide to Edge AI","alternateName":"From Physical Signals and Data to Learned Behavior, Deployment, and Verification","author":{"@type":"Person","name":"Satheesh Gannoju"},"publisher":{"@type":"Organization","name":"Edge2XAI Publications"},"inLanguage":"en","isbn":"9798982285508","url":"https://edge2xai.com/guide.html","image":"https://edge2xai.com/covers/book1-cover.webp","numberOfPages":347,"bookFormat":"https://schema.org/Paperback"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","name":"The Embedded Engineer's Guide to Edge AI","alternateName":"From Physical Signals and Data to Learned Behavior, Deployment, and Verification","author":{"@type":"Person","name":"Satheesh Gannoju"},"publisher":{"@type":"Organization","name":"Edge2XAI Publications"},"inLanguage":"en","isbn":"9798982285508","url":"https://edge2xai.com/guide.html","image":"https://edge2xai.com/covers/book1-cover.webp","numberOfPages":347,"bookFormat":"https://schema.org/Paperback","datePublished":"2026-11-04","workExample":[{"@type":"Book","bookFormat":"https://schema.org/EBook","isbn":"9798982285515","url":"https://www.amazon.com/dp/B0HPD1XZWV","datePublished":"2026-11-04"}]}</script>
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -55,15 +55,16 @@
     <div class="wrap g-hero-grid">
       <div>
         <p class="breadcrumb"><a href="index.html">Home</a> / <a href="books.html">Knowledge</a> / The Guide to Edge AI</p>
-        <span class="g-chip">New book &middot; Launching November 4, 2026</span>
+        <span class="g-chip">Kindle pre-order now available &middot; Releasing November 4, 2026</span>
         <h1 id="g-title">The Embedded Engineer&rsquo;s Guide to <em>Edge AI</em></h1>
         <p class="g-sub">From Physical Signals and Data to Learned Behavior, Deployment, and Verification</p>
         <p class="g-promise">You already know how to build products that survive the real world. This book shows how to keep that discipline when a machine-learning model joins the product.</p>
         <div class="g-actions">
-          <a class="btn btn-primary" href="#get-the-book">Get the book</a>
+          <a class="btn btn-primary" data-book="kindle" href="https://www.amazon.com/dp/B0HPD1XZWV" target="_blank" rel="noopener noreferrer">Pre-order Kindle on Amazon</a>
+          <a class="btn btn-ghost" href="#g-problem-h">Explore the Book</a>
           <a class="btn btn-ghost" href="#checklist">Free handoff checklist</a>
         </div>
-        <p class="g-note">By Satheesh Gannoju &middot; 347 pages &middot; Paperback and Kindle</p>
+        <p class="g-note">By Satheesh Gannoju &middot; 347 pages &middot; Kindle pre-order now &middot; Paperback scheduled for the same date</p>
       </div>
       <figure class="g-cover"><img src="covers/book1-cover.webp" alt="Cover of The Embedded Engineer's Guide to Edge AI by Satheesh Gannoju" width="760" height="1140"></figure>
     </div>
@@ -146,15 +147,42 @@
 
   <section id="get-the-book" aria-labelledby="g-get-h">
     <div class="wrap">
-      <div class="g-section-head"><p class="eyebrow">Get the book</p><h2 id="g-get-h">Launching November 4, 2026.</h2><p>Paperback and Kindle edition on Amazon. The link goes live on launch day; join the checklist list above to be told first.</p></div>
-      <div class="g-actions" style="margin-top:0"><a class="btn btn-primary" href="#checklist">Get notified</a></div>
+      <!-- PUBLICATION STATE (edit here after Nov 4): Kindle URL/status, paperback status/URL, release date,
+           store links and Author Central URL. See also the data-book="kindle" hero button and the
+           JSON-LD workExample above. Paperback stays non-clickable until a verified listing URL exists. -->
+      <div class="g-section-head"><p class="eyebrow">Get the book</p><h2 id="g-get-h">Kindle pre-order now available.</h2><p>The Kindle edition is available to pre-order on Amazon and is delivered to your device on the release date, November 4, 2026. The paperback is scheduled for the same date.</p></div>
+      <div class="g-formats">
+        <article class="g-format" aria-labelledby="g-fmt-kindle">
+          <h3 id="g-fmt-kindle">Kindle eBook</h3>
+          <dl><dt>Status</dt><dd>Available for pre-order</dd><dt>Release</dt><dd><time datetime="2026-11-04">November 4, 2026</time></dd></dl>
+          <a class="btn btn-primary" data-book="kindle" href="https://www.amazon.com/dp/B0HPD1XZWV" target="_blank" rel="noopener noreferrer">Pre-order Kindle</a>
+        </article>
+        <article class="g-format" aria-labelledby="g-fmt-paper">
+          <h3 id="g-fmt-paper">Paperback</h3>
+          <dl><dt>Status</dt><dd>Scheduled for November 4, 2026</dd><dt>Price</dt><dd>$24.99 USD</dd></dl>
+          <span class="btn btn-ghost g-disabled" data-book="paperback" role="note" aria-disabled="true">Coming November 4</span>
+        </article>
+      </div>
+      <details class="g-stores" id="amazon-stores">
+        <summary>Choose your Amazon store</summary>
+        <ul>
+          <li><a href="https://www.amazon.com/dp/B0HPD1XZWV" target="_blank" rel="noopener noreferrer" hreflang="en-US">United States</a></li>
+          <li><a href="https://www.amazon.in/dp/B0HPD1XZWV" target="_blank" rel="noopener noreferrer" hreflang="en-IN">India</a></li>
+          <li><a href="https://www.amazon.co.uk/dp/B0HPD1XZWV" target="_blank" rel="noopener noreferrer" hreflang="en-GB">United Kingdom</a></li>
+          <li><a href="https://www.amazon.ca/dp/B0HPD1XZWV" target="_blank" rel="noopener noreferrer" hreflang="en-CA">Canada</a></li>
+          <li><a href="https://www.amazon.com.au/dp/B0HPD1XZWV" target="_blank" rel="noopener noreferrer" hreflang="en-AU">Australia</a></li>
+          <li><a href="https://www.amazon.de/dp/B0HPD1XZWV" target="_blank" rel="noopener noreferrer" hreflang="de">Germany</a></li>
+          <li><a href="https://www.amazon.co.jp/dp/B0HPD1XZWV" target="_blank" rel="noopener noreferrer" hreflang="ja">Japan</a></li>
+        </ul>
+        <p class="g-note">Kindle edition. Regional availability and pricing may vary by Amazon store.</p>
+      </details>
       <table class="g-details" style="margin-top:30px"><tbody>
         <tr><th>Title</th><td>The Embedded Engineer&rsquo;s Guide to Edge AI</td></tr>
         <tr><th>Subtitle</th><td>From Physical Signals and Data to Learned Behavior, Deployment, and Verification</td></tr>
         <tr><th>Author</th><td>Satheesh Gannoju</td></tr>
         <tr><th>Publisher</th><td>Edge2XAI Publications</td></tr>
-        <tr><th>Paperback</th><td>347 pages, 7 &times; 10 in &middot; ISBN <code>979-8-9822855-0-8</code></td></tr>
-        <tr><th>eBook</th><td>EPUB &middot; ISBN <code>979-8-9822855-1-5</code></td></tr>
+        <tr><th>Paperback</th><td>347 pages, 7 &times; 10 in &middot; ISBN <code>979-8-9822855-0-8</code> &middot; $24.99 USD</td></tr>
+        <tr><th>eBook</th><td>Kindle &middot; ISBN <code>979-8-9822855-1-5</code></td></tr>
         <tr><th>First edition</th><td>2026</td></tr>
       </tbody></table>
     </div>
@@ -168,7 +196,10 @@
         <h3 id="g-au-h">Satheesh Gannoju</h3>
         <p class="role">Embedded systems &middot; Real-time firmware &middot; EdgeAI</p>
         <p>Satheesh is an embedded systems engineer with nearly two decades of experience in real-time firmware, RTOS-based platforms, and system architecture across automotive and safety-critical applications. His current focus is bridging traditional embedded engineering with practical EdgeAI and on-device machine learning.</p>
-        <div class="about-links"><a href="https://www.linkedin.com/in/satheesh-g-40199719/" target="_blank" rel="noopener">LinkedIn &rarr;</a><a href="about.html">About Edge2XAI &rarr;</a><a href="contact.html">Contact &rarr;</a></div>
+        <div class="about-links"><a href="https://www.linkedin.com/in/satheesh-g-40199719/" target="_blank" rel="noopener">LinkedIn &rarr;</a>
+          <!-- Author Central: uncomment and set href once the public Amazon Author Page URL is confirmed.
+          <a href="AUTHOR_PAGE_URL" target="_blank" rel="noopener noreferrer">Amazon Author Page &rarr;</a> -->
+          <a href="about.html">About Edge2XAI &rarr;</a><a href="contact.html">Contact &rarr;</a></div>
       </div>
     </div>
   </section>
