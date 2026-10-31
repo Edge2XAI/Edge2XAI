@@ -31,7 +31,7 @@
 .g-do{display:grid;grid-template-columns:1fr 1fr;gap:12px 40px;margin:0;padding:0;list-style:none}
 .g-do li{position:relative;padding:12px 0 12px 30px;border-bottom:1px solid var(--line)}
 .g-do li:before{content:"";position:absolute;left:2px;top:19px;width:14px;height:8px;border-left:3px solid var(--signal);border-bottom:3px solid var(--signal);transform:rotate(-45deg)}
-.g-for{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g-for{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .g-for div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
 .g-for strong{display:block;margin-bottom:4px}
 .g-for span{color:var(--ink-soft);font-size:.93rem}
