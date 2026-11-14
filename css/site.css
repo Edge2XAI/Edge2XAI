@@ -4862,3 +4862,21 @@ header.site .nav-row{padding-block:10px;}
   background:linear-gradient(90deg,#7fe9ff 0%,#4fb4ff 48%,#a98bff 100%);
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
+
+/* ---------- EdgeVerse perspective prompts ---------- */
+.pv-bar{display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 44px 8px 16px;position:relative;
+  background:var(--e2-navy,#082f61);color:#fff;font-size:.9rem;line-height:1.35;text-align:center;}
+.pv-bar a{color:#9fe4ff;font-weight:600;text-decoration:underline;text-underline-offset:3px;white-space:nowrap;}
+.pv-bar a:hover{color:#fff;}
+.pv-bar button{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:0;color:#fff;
+  font-size:1.3rem;line-height:1;cursor:pointer;padding:6px 10px;border-radius:6px;opacity:.8;}
+.pv-bar button:hover{opacity:1;background:rgba(255,255,255,.12);}
+.pv-pill{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:center;
+  background:var(--copper,#1769e0);color:#fff;border-radius:999px;box-shadow:0 6px 20px rgba(8,47,97,.28);
+  opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s;}
+.pv-pill.is-on{opacity:1;transform:none;pointer-events:auto;}
+.pv-pill a{color:#fff;font-weight:600;font-size:.92rem;padding:11px 8px 11px 18px;text-decoration:none;}
+.pv-pill button{background:none;border:0;color:#fff;font-size:1.15rem;cursor:pointer;padding:8px 14px 8px 6px;opacity:.8;}
+.pv-pill button:hover{opacity:1;}
+@media (max-width:520px){.pv-bar{font-size:.82rem;flex-wrap:wrap;gap:2px 8px;}}
+@media (prefers-reduced-motion:reduce){.pv-pill{transition:none;}}
