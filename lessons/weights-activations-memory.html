@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Weights, Activations and Memory — Embedded ML Lessons — Edge2XAI</title>
+<meta name="description" content="A practical lesson on weights, activations, memory and CPU load in an embedded neural network, using a real voice-command model on an ESP32-S3. Measured numbers, honest failures, no ML background needed.">
+<meta name="theme-color" content="#06152B">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css?v=36">
+<link rel="stylesheet" href="../css/lessons.css?v=1">
+<link rel="canonical" href="https://edge2xai.com/lessons/weights-activations-memory.html">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/brand/favicon-32.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="shortcut icon" href="../favicon.ico">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Edge2XAI">
+<meta property="og:title" content="Weights, Activations and Memory — Embedded ML Lessons">
+<meta property="og:description" content="Why a more precise number can cost an embedded processor time, not just memory. A measured lesson from a real voice-command model on an ESP32-S3.">
+<meta property="og:url" content="https://edge2xai.com/lessons/weights-activations-memory.html">
+<meta property="og:image" content="https://edge2xai.com/images/og-edge2xai.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Weights, Activations and Memory — Embedded ML Lessons">
+<meta name="twitter:description" content="Why a more precise number can cost an embedded processor time, not just memory.">
+<meta name="twitter:image" content="https://edge2xai.com/images/og-edge2xai.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Weights, Activations and Memory","description":"A practical lesson on weights, activations, memory and CPU load in an embedded neural network, using a real voice-command model on an ESP32-S3.","author":{"@type":"Person","name":"Satheesh Gannoju"},"publisher":{"@type":"Organization","name":"Edge2XAI","url":"https://edge2xai.com/"},"mainEntityOfPage":"https://edge2xai.com/lessons/weights-activations-memory.html","dateModified":"2026-11-25"}</script>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="../index.html" class="wordmark brand-logo" aria-label="Edge2XAI home"><picture><source media="(max-width:520px)" srcset="../images/brand/neon/e2x-neon-header-symbol.png"><img class="brand-logo-img" src="../images/brand/neon/e2x-neon-header.png" alt="Edge2XAI" width="192" height="56"></picture></a>
+    <nav class="primary" id="primary-nav" aria-label="Primary navigation">
+      <a href="../books.html">Knowledge</a>
+      <a href="../practice.html">Learning</a>
+      <a href="index.html" aria-current="page">Lessons</a>
+      <a href="../edgeverse.html">EdgeVerse</a>
+      <a href="../advisory.html">Advisory</a>
+      <a href="../about.html">About</a>
+    </nav>
+    <a class="btn btn-primary" href="../contact.html">Connect</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <section class="lesson-hero">
+    <div class="wrap lesson-hero-grid">
+      <div class="lesson-copy">
+        <p class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Embedded ML Lessons</a> / Lesson 1</p>
+        <p class="eyebrow">Embedded ML Lessons · Lesson 1</p>
+        <h1>Weights, Activations <em>and Memory.</em></h1>
+        <p class="lead">Why a more precise number can cost an embedded processor time, not just memory. A real voice-command model on an ESP32-S3 shows where the memory goes, where the time goes, and what a failed experiment teaches.</p>
+        <p class="lesson-meta">About 15 minutes · No ML background needed · Measured values are marked as measured</p>
+      </div>
+      <div class="lesson-hero-visual">
+        <img src="../images/pattern-audio.jpg" alt="Audio and speech: a voice-interface wearable with a sound-wave graphic">
+      </div>
+    </div>
+  </section>
+
+  <article class="lesson-body">
+
+    <h2>What you will learn</h2>
+    <ul>
+      <li>What a <strong>weight</strong> and an <strong>activation</strong> are, in plain words.</li>
+      <li>Why weights mostly cost <strong>storage</strong> and activations mostly cost <strong>working memory</strong>.</li>
+      <li>Why a wider number can make the same arithmetic <strong>slower</strong>, even when the number of operations stays the same.</li>
+      <li>How to check <strong>which step</strong> causes an error before you change it.</li>
+      <li>Why you must check a model's output on the device <strong>before</strong> you time it.</li>
+    </ul>
+
+    <h2>1. Start with one spoken word</h2>
+    <p>Say the word for <em>mute</em> to a voice-command device. Here is what happens, in order:</p>
+<pre><code class="lesson-flow">you speak  →  microphone  →  audio samples
+           →  audio features (1,950 numbers)
+           →  neural network  →  13 scores, one per command
+           →  highest score wins  →  "mute" event sent to the product</code></pre>
+    <p>A neural network is a long chain of multiply-and-add steps. Two kinds of numbers flow through it, and they are easy to mix up.</p>
+    <div class="table-scroll"><table>
+      <tr><th>Term</th><th>What it is</th><th>Analogy</th><th>When it changes</th></tr>
+      <tr><td><strong>Weight</strong></td><td>A number the model learned during training. It says how much each input matters.</td><td>Years of experience: what a sound engineer knows about voices.</td><td>Never, while the device runs.</td></tr>
+      <tr><td><strong>Activation</strong></td><td>A number the model computes from the current input, and passes to the next step.</td><td>What the engineer hears right now, and how they interpret it.</td><td>Every time you speak.</td></tr>
+    </table></div>
+    <p>The weights are fixed. The activations change with every sound. So weights are <em>stored knowledge</em>, and activations are <em>work in progress</em>.</p>
+    <figure class="lesson-figure">
+<svg viewBox="0 0 600 262" role="img" aria-label="Flow from spoken word to mute event"><defs><marker id="dgArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#12909e"/></marker></defs><rect class="dg-box" x="20" y="20" width="160" height="80" rx="10"/><text x="100.0" y="50" text-anchor="middle" font-size="17" font-weight="600">You speak</text><text class="dg-small" x="100.0" y="74" text-anchor="middle" font-size="14">“mute”</text><rect class="dg-box" x="220" y="20" width="160" height="80" rx="10"/><text x="300.0" y="50" text-anchor="middle" font-size="17" font-weight="600">Microphone</text><text class="dg-small" x="300.0" y="74" text-anchor="middle" font-size="14">audio samples</text><rect class="dg-accent" x="420" y="20" width="160" height="80" rx="10"/><text x="500.0" y="50" text-anchor="middle" font-size="17" font-weight="600">Audio features</text><text class="dg-small" x="500.0" y="74" text-anchor="middle" font-size="14">1,950 numbers</text><rect class="dg-accent" x="20" y="160" width="160" height="80" rx="10"/><text x="100.0" y="190" text-anchor="middle" font-size="17" font-weight="600">Neural network</text><text class="dg-small" x="100.0" y="214" text-anchor="middle" font-size="14">251,264 weights</text><rect class="dg-box" x="220" y="160" width="160" height="80" rx="10"/><text x="300.0" y="190" text-anchor="middle" font-size="17" font-weight="600">13 scores</text><text class="dg-small" x="300.0" y="214" text-anchor="middle" font-size="14">highest wins</text><rect class="dg-box" x="420" y="160" width="160" height="80" rx="10"/><text x="500.0" y="190" text-anchor="middle" font-size="17" font-weight="600">Mute event</text><text class="dg-small" x="500.0" y="214" text-anchor="middle" font-size="14">sent to product</text><path class="dg-arrow" d="M183,60 L217,60"/><path class="dg-arrow" d="M183,200 L217,200"/><path class="dg-arrow" d="M383,60 L417,60"/><path class="dg-arrow" d="M383,200 L417,200"/><path class="dg-arrow" d="M500,102 L500,130 L100,130 L100,152"/><text class="dg-small" x="20" y="256" font-size="13">Shaded stages hold the model’s weights and activations.</text></svg>
+    <figcaption>Figure 1. One spoken word, end to end. The model is one stage in a longer chain; its weights and activations are the two shaded stages.</figcaption>
+    </figure>
+    <figure class="lesson-figure">
+<svg viewBox="0 0 780 240" role="img" aria-label="Weights are stored and fixed; activations are computed per sound"><defs><marker id="dgArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#12909e"/></marker></defs><rect class="dg-box" x="10" y="20" width="200" height="200" rx="12"/><text x="110" y="54" text-anchor="middle" font-size="19" font-weight="600">Weights</text><text class="dg-small" x="110" y="86" text-anchor="middle" font-size="14">learned in training</text><text class="dg-small" x="110" y="110" text-anchor="middle" font-size="14">fixed while running</text><text class="dg-small" x="110" y="134" text-anchor="middle" font-size="14">stored in flash</text><text class="dg-small" x="110" y="158" text-anchor="middle" font-size="14">251,264 values</text><rect class="dg-warn" x="290" y="20" width="200" height="200" rx="12"/><text x="390" y="54" text-anchor="middle" font-size="19" font-weight="600">Activations</text><text class="dg-small" x="390" y="86" text-anchor="middle" font-size="14">computed per sound</text><text class="dg-small" x="390" y="110" text-anchor="middle" font-size="14">change when you speak</text><text class="dg-small" x="390" y="134" text-anchor="middle" font-size="14">held in RAM buffer</text><text class="dg-small" x="390" y="158" text-anchor="middle" font-size="14">reused each inference</text><rect class="dg-box" x="570" y="20" width="200" height="200" rx="12"/><text x="670" y="54" text-anchor="middle" font-size="19" font-weight="600">Inference</text><text class="dg-small" x="670" y="86" text-anchor="middle" font-size="14">weights × activations</text><text class="dg-small" x="670" y="110" text-anchor="middle" font-size="14">+ multiply-and-add</text><text class="dg-small" x="670" y="134" text-anchor="middle" font-size="14">= 13 scores</text><path class="dg-arrow" d="M214,120 L284,120"/><path class="dg-arrow" d="M494,120 L564,120"/></svg>
+    <figcaption>Figure 2. Weights are stored knowledge; activations are the work in progress. Inference combines the two.</figcaption>
+    </figure>
+
+    <h2>2. A tiny example you can check by hand</h2>
+    <p>Imagine a neuron that looks at only four audio features. Its score is the sum of activation times weight for each feature. Here the weights are illustrative, not taken from our model:</p>
+    <div class="table-scroll"><table>
+      <tr><th>Feature</th><th class="num">Activation (sound "mute")</th><th class="num">Weight</th><th class="num">Product</th></tr>
+      <tr><td>1</td><td class="num">0.8</td><td class="num">0.9</td><td class="num">0.72</td></tr>
+      <tr><td>2</td><td class="num">0.7</td><td class="num">0.8</td><td class="num">0.56</td></tr>
+      <tr><td>3</td><td class="num">0.2</td><td class="num">−0.5</td><td class="num">−0.10</td></tr>
+      <tr><td>4</td><td class="num">0.9</td><td class="num">0.7</td><td class="num">0.63</td></tr>
+      <tr><th colspan="3">Score</th><th class="num">1.81</th></tr>
+    </table></div>
+    <p>Now say <em>up</em> instead. The weights stay the same, but the activations change: <code>0.2, 0.3, 0.9, 0.1</code>. The score becomes <code>0.18 + 0.24 − 0.45 + 0.07 = 0.04</code>. Same weights, different inputs, different answer. That is inference.</p>
+    <p>Each multiply-and-add is a <strong>MAC</strong> (multiply-accumulate). Counting MACs is the simplest way to estimate how much work a model does.</p>
+
+    <h2>3. Our real model in numbers</h2>
+    <p>The voice-command model has three layers:</p>
+    <div class="table-scroll"><table>
+      <tr><th>Layer</th><th class="num">Values</th><th class="num">Weights into this layer</th></tr>
+      <tr><td>Input (audio features)</td><td class="num">1,950</td><td class="num">–</td></tr>
+      <tr><td>Hidden layer, 128 neurons</td><td class="num">128</td><td class="num">1,950 × 128 = 249,600</td></tr>
+      <tr><td>Output, 13 command scores</td><td class="num">13</td><td class="num">128 × 13 = 1,664</td></tr>
+      <tr><th>Total</th><th class="num"></th><th class="num">251,264 weights (plus 141 biases)</th></tr>
+    </table></div>
+    <p>Every hidden neuron looks at all 1,950 inputs. That single fact drives most of the story below.</p>
+    <figure class="lesson-figure">
+<svg viewBox="0 0 600 250" role="img" aria-label="Each of four inputs connects to each of three neurons"><line class="dg-line" x1="150" y1="40" x2="330" y2="60" opacity="0.55"/><line class="dg-line" x1="150" y1="40" x2="330" y2="120" opacity="0.55"/><line class="dg-line" x1="150" y1="40" x2="330" y2="180" opacity="0.55"/><line class="dg-line" x1="150" y1="90" x2="330" y2="60" opacity="0.55"/><line class="dg-line" x1="150" y1="90" x2="330" y2="120" opacity="0.55"/><line class="dg-line" x1="150" y1="90" x2="330" y2="180" opacity="0.55"/><line class="dg-line" x1="150" y1="140" x2="330" y2="60" opacity="0.55"/><line class="dg-line" x1="150" y1="140" x2="330" y2="120" opacity="0.55"/><line class="dg-line" x1="150" y1="140" x2="330" y2="180" opacity="0.55"/><line class="dg-line" x1="150" y1="190" x2="330" y2="60" opacity="0.55"/><line class="dg-line" x1="150" y1="190" x2="330" y2="120" opacity="0.55"/><line class="dg-line" x1="150" y1="190" x2="330" y2="180" opacity="0.55"/><rect class="dg-box" x="30" y="23" width="120" height="34" rx="8"/><text x="90" y="45" text-anchor="middle" font-size="14" class="dg-mono">input A1</text><rect class="dg-box" x="30" y="73" width="120" height="34" rx="8"/><text x="90" y="95" text-anchor="middle" font-size="14" class="dg-mono">input A2</text><rect class="dg-box" x="30" y="123" width="120" height="34" rx="8"/><text x="90" y="145" text-anchor="middle" font-size="14" class="dg-mono">input A3</text><rect class="dg-box" x="30" y="173" width="120" height="34" rx="8"/><text x="90" y="195" text-anchor="middle" font-size="14" class="dg-mono">input A4</text><rect class="dg-accent" x="330" y="43" width="120" height="34" rx="8"/><text x="390" y="65" text-anchor="middle" font-size="14" class="dg-mono">neuron N1</text><rect class="dg-accent" x="330" y="103" width="120" height="34" rx="8"/><text x="390" y="125" text-anchor="middle" font-size="14" class="dg-mono">neuron N2</text><rect class="dg-accent" x="330" y="163" width="120" height="34" rx="8"/><text x="390" y="185" text-anchor="middle" font-size="14" class="dg-mono">neuron N3</text><text class="dg-small" x="468" y="62" font-size="13">A1 feeds all</text><text class="dg-small" x="468" y="80" font-size="13">three neurons:</text><text class="dg-small" x="468" y="118" font-size="13">stored once,</text><text class="dg-small" x="468" y="136" font-size="13">used three times</text><text class="dg-small" x="20" y="240" font-size="13">Our model: 1,950 inputs and 128 neurons, so 249,600 multiply-adds per inference.</text></svg>
+    <figcaption>Figure 3. Every hidden neuron reads every input. The input is stored once but used once per neuron. This is why the arithmetic, not the storage, dominates. Four inputs and three neurons shown for clarity.</figcaption>
+    </figure>
+
+    <h2>4. Where the memory goes: flash versus RAM</h2>
+    <p>The weights are stored in <strong>flash</strong>, the device's program memory, built into the firmware. The activations are held in <strong>RAM</strong>, in a working buffer that the runtime reuses on every inference.</p>
+    <h3>Weights: storage grows with precision</h3>
+    <div class="table-scroll"><table>
+      <tr><th>Weight format</th><th class="num">Bytes per weight</th><th class="num">Weight storage</th></tr>
+      <tr><td>8-bit integer (INT8)</td><td class="num">1</td><td class="num">251,264 B</td></tr>
+      <tr><td>16-bit integer (INT16)</td><td class="num">2</td><td class="num">502,528 B</td></tr>
+      <tr><td>32-bit float (FP32)</td><td class="num">4</td><td class="num">1,005,056 B</td></tr>
+    </table></div>
+    <h3>Activations: the working set is small</h3>
+    <p>The input buffer holds 1,950 values. Its size depends on the number format:</p>
+    <div class="table-scroll"><table>
+      <tr><th>Input format</th><th class="num">Input buffer (RAM)</th></tr>
+      <tr><td>8-bit (INT8)</td><td class="num">1,950 B</td></tr>
+      <tr><td>16-bit (INT16)</td><td class="num">3,900 B</td></tr>
+      <tr><td>32-bit float (FP32)</td><td class="num">7,800 B</td></tr>
+    </table></div>
+    <figure class="lesson-figure">
+<svg viewBox="0 0 760 230" role="img" aria-label="Weights in flash are 251 KB at 8-bit and 503 KB at 16-bit; the input buffer in RAM is 2 KB at 8-bit and 4 KB at 16-bit"><text class="dg-small" x="0" y="20" font-weight="600">FLASH (weights)</text><text x="0" y="46" font-size="13">8-bit weights</text><rect class="dg-box" x="170" y="30" width="229.8" height="24" rx="4"/><text class="dg-small dg-mono" x="407.8" y="46" font-size="12">251,264 B</text><text x="0" y="84" font-size="13">16-bit weights</text><rect class="dg-warn" x="170" y="68" width="459.5" height="24" rx="4"/><text class="dg-small dg-mono" x="637.5" y="84" font-size="12">502,528 B</text><text class="dg-small" x="0" y="122" font-weight="600">RAM (input buffer)</text><text x="0" y="148" font-size="13">8-bit input</text><rect class="dg-accent" x="170" y="132" width="3.0" height="24" rx="4"/><text class="dg-small dg-mono" x="181.0" y="148" font-size="12">1,950 B</text><text x="0" y="186" font-size="13">16-bit input</text><rect class="dg-accent" x="170" y="170" width="3.6" height="24" rx="4"/><text class="dg-small dg-mono" x="181.6" y="186" font-size="12">3,900 B</text><text class="dg-small" x="0" y="222">Same scale for all four bars. The 16-bit input adds about 2 KB of RAM; 16-bit weights would add about 251 KB of flash.</text></svg>
+    <figcaption>Figure 4. The same scale for every bar. Weights dominate flash; the input buffer is small. Logical activation counts are not the peak RAM of the runtime.</figcaption>
+    </figure>
+    <div class="lesson-callout"><strong>The key comparison.</strong> Moving our input from 8 to 16 bits adds about 2 KB of RAM. Moving every weight from 8 to 16 bits would add about 251 KB of flash. Activations are a small part of this model's memory; weights are the big part.</div>
+    <p>A word of caution: the sum of all activation values (2,104 logical values for this model) is not the peak RAM your runtime needs. Scratch buffers, alignment and the runtime's own bookkeeping all add to it. Always measure the arena.</p>
+
+    <h2>5. Memory is capacity; computation is recurring work</h2>
+    <p>Memory is a one-time reservation. Computation is paid again on every inference. Our model runs about ten times per second (a new window every 100 ms), and each run performs the same 251,264 MACs:</p>
+    <div class="table-scroll"><table>
+      <tr><th>Duration</th><th class="num">MAC operations, if inference keeps up</th><th class="num">Extra input RAM from 16-bit input</th></tr>
+      <tr><td>One inference</td><td class="num">251,264</td><td class="num">1,950 B (fixed)</td></tr>
+      <tr><td>One second</td><td class="num">2,512,640</td><td class="num">1,950 B</td></tr>
+      <tr><td>One minute</td><td class="num">150,758,400</td><td class="num">1,950 B</td></tr>
+      <tr><td>One hour</td><td class="num">9,045,504,000</td><td class="num">1,950 B</td></tr>
+    </table></div>
+    <p>The memory cost stays flat, while the work keeps adding up. A small change in how each number is stored can therefore change a very large number of operations.</p>
+    <p>Here is one way to see why. In the hidden layer, each of the 1,950 inputs is used by all 128 neurons. The input is stored once but used 128 times. The computation, not the storage, is where precision costs you.</p>
+
+    <h2>6. Why a wider number can be slower</h2>
+    <p>Think of a warehouse. An INT8 forklift can carry several small boxes in one trip. If the boxes are bigger, the forklift attachment does not fit, and the same boxes need more trips. The number of boxes has not changed. The time has.</p>
+    <p>Three things decide how fast the same arithmetic runs:</p>
+    <ul>
+      <li><strong>Packing (SIMD).</strong> A 32-bit register holds four 8-bit values but only two 16-bit values. Chip instructions that work on several values at once are most efficient when the data is packed tightly.</li>
+      <li><strong>The kernel.</strong> A kernel is the code that does the arithmetic. Chip vendors often provide optimized kernels for common formats. If no optimized kernel exists for your format, the runtime falls back to a general one.</li>
+      <li><strong>The accumulator.</strong> A neuron adds up 1,950 products. Wider inputs produce wider products, and the running total needs more bits.</li>
+    </ul>
+    <p>The accumulator example makes the last point concrete. Two extreme cases, each repeated 1,950 times:</p>
+    <div class="table-scroll"><table>
+      <tr><th>Format</th><th>One product (worst case)</th><th class="num">Sum of 1,950 products</th><th>Fits in 32 bits?</th></tr>
+      <tr><td>8-bit input × 8-bit weight</td><td>127 × 127 = 16,129</td><td class="num">31,451,550</td><td>Yes (limit 2,147,483,647)</td></tr>
+      <tr><td>16-bit input × 8-bit weight</td><td>32,767 × 127 = 4,161,409</td><td class="num">8,114,747,550</td><td>No</td></tr>
+    </table></div>
+    <p>A 16-bit path therefore needs a 64-bit accumulator. The extra cost is in the arithmetic, not in memory: one accumulator is reused for all 1,950 products of a neuron, so it adds only a few bytes of state.</p>
+    <div class="lesson-callout warn"><strong>A wider number is not automatically slower.</strong> A single 16-bit multiplication is no slower than an 8-bit one on paper. The risk is that a faster path is lost. In the TFLM version we used, the chip library provides an optimized kernel for our 8-bit fully connected layer, but the 16-bit-input path runs on a general kernel. We did not measure how much slower that is, because the 16-bit build did not produce correct output on the board (section 8).</div>
+
+    <h2>7. Does more precision help? Find the error before you fix it</h2>
+    <p>Our first idea was simple. The model's inputs are 1,950 numbers rounded to 8 bits. The words <em>mute</em> and <em>up</em> can produce similar numbers, and rounding may merge them. With a made-up scale of 0.01 for illustration, two features of 10.2 and 10.5 would become 1,020 and 1,050, and stay different. At 8 bits with our real input scale of about 0.8669, both round to the same value.</p>
+    <p>That idea is reasonable, but it is a hypothesis, so we measured each quantization step separately:</p>
+    <div class="table-scroll"><table>
+      <tr><th>Step that is quantized</th><th class="num">Accuracy cost on the test windows</th></tr>
+      <tr><td>Input features only</td><td class="num">0.03 points</td></tr>
+      <tr><td>Output scores (logits) only</td><td class="num">3.16 points</td></tr>
+    </table></div>
+    <p>The input rounding costs almost nothing. The output scores hold most of the loss. A 16-bit candidate helped because it kept the output in higher precision, not because its input was wider. Our first explanation was wrong, and the measurement showed where the error really lived.</p>
+    <figure class="lesson-figure">
+<svg viewBox="0 0 760 150" role="img" aria-label="Accuracy cost of quantizing input versus output scores"><text x="0" y="40" font-size="13">Input features only</text><rect class="dg-accent" x="210" y="26" width="4.7" height="22" rx="4"/><text class="dg-small dg-mono" x="222.7" y="42" font-size="12">0.03 points</text><text x="0" y="98" font-size="13">Output scores only</text><rect class="dg-warn" x="210" y="84" width="430" height="22" rx="4"/><text class="dg-small dg-mono" x="650" y="100" font-size="12">3.16 points</text><text class="dg-small" x="0" y="140">Bars drawn to the same scale. Measured on the test windows.</text></svg>
+    <figcaption>Figure 5. Where the accuracy loss came from. Rounding the input cost almost nothing; rounding the output scores cost most of it.</figcaption>
+    </figure>
+    <div class="lesson-takeaway"><strong>Lesson:</strong> before you spend time or memory on a fix, measure which step causes the error. A reasonable-sounding cause can be the wrong one.</div>
+
+    <h2>8. What happened on the board</h2>
+    <p>The 16-bit candidate passed the checks we ran on the PC. On the ESP32-S3 it failed in a way that was easy to miss. For a silent input, all 13 output classes came back with the same probability, 0.07693 (one in thirteen). With every score equal, the code picks the first class, and that looked like a correct "silence" result.</p>
+    <p>Our boot self-test had the same blind spot. It checked only that the top class was silence, so the tie passed. We then changed the test to require a clear margin between silence and the next class, and the 16-bit build now fails the test as it should.</p>
+    <figure class="lesson-figure">
+<svg viewBox="0 0 690 150" role="img" aria-label="How the 16-bit build looked correct on the PC and wrong on the board"><defs><marker id="dgArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#12909e"/></marker></defs><rect class="dg-box" x="10" y="20" width="120" height="90" rx="10"/><text x="70.0" y="50" text-anchor="middle" font-size="17" font-weight="600">PC check</text><text class="dg-small" x="70.0" y="74" text-anchor="middle" font-size="14">passes</text><path class="dg-arrow" d="M133,65 L143,65"/><rect class="dg-warn" x="146" y="20" width="120" height="90" rx="10"/><text x="206.0" y="50" text-anchor="middle" font-size="17" font-weight="600">Board</text><text class="dg-small" x="206.0" y="74" text-anchor="middle" font-size="14">zero input</text><path class="dg-arrow" d="M269,65 L279,65"/><rect class="dg-warn" x="282" y="20" width="120" height="90" rx="10"/><text x="342.0" y="50" text-anchor="middle" font-size="17" font-weight="600">13 scores</text><text class="dg-small" x="342.0" y="74" text-anchor="middle" font-size="14">all 0.07693</text><path class="dg-arrow" d="M405,65 L415,65"/><rect class="dg-warn" x="418" y="20" width="120" height="90" rx="10"/><text x="478.0" y="50" text-anchor="middle" font-size="17" font-weight="600">argmax</text><text class="dg-small" x="478.0" y="74" text-anchor="middle" font-size="14">first class wins</text><path class="dg-arrow" d="M541,65 L551,65"/><rect class="dg-accent" x="554" y="20" width="120" height="90" rx="10"/><text x="614.0" y="50" text-anchor="middle" font-size="17" font-weight="600">Self-test</text><text class="dg-small" x="614.0" y="74" text-anchor="middle" font-size="14">needs margin</text><text class="dg-small" x="10" y="140" font-size="13">A tie passed the old self-test. The fix requires a clear margin between silence and the next class.</text></svg>
+    <figcaption>Figure 7. How a wrong output looked right. A tie resolves to the first class, which here was silence.</figcaption>
+    </figure>
+    <div class="lesson-callout"><strong>Lessons from the board:</strong>
+      <ul>
+        <li>A correct model file does not guarantee correct output. The runtime and its kernels decide what really runs.</li>
+        <li>A check that looks only at the winning label can be fooled by a tie. Check the margin, or check that the outputs are not all the same.</li>
+        <li>Do not time a build whose output is wrong. Its speed describes a different computation. The 16-bit timing from that build is not a valid comparison.</li>
+      </ul>
+    </div>
+    <p>The cause was not found. The runtime version we use does not let us read internal tensors, so the problem is still open. The 2× and 3× slowdown figures in the next sections are scenarios, not measurements.</p>
+
+    <h2>9. The real-time budget: a 100 ms loop</h2>
+    <p>A new window arrives every 100 ms. If one inference takes longer than that, windows wait in a queue, and when the queue is full, new windows are dropped. A late or missing window means a late or missing command.</p>
+    <p>On an earlier instrumented INT8 build, the median inference took 33.5 ms. Here is what that means for the budget:</p>
+    <figure class="lesson-figure">
+<svg viewBox="0 0 920 210" role="img" aria-label="Inference time against the 100 ms window"><line x1="200" y1="10" x2="200" y2="180" stroke="#7c8790" stroke-dasharray="4 4"/><line x1="700" y1="10" x2="700" y2="180" stroke="#c7ced4" stroke-dasharray="4 4"/><text class="dg-small" x="700" y="200" text-anchor="middle">100 ms: next window arrives</text><text x="0" y="37" font-size="13">INT8 measured</text><rect class="dg-accent" x="200" y="20" width="167.5" height="26" rx="4"/><text class="dg-small dg-mono" x="375.5" y="37" font-size="12">33.5 ms (66.5 ms free)</text><text x="0" y="87" font-size="13">2× scenario</text><rect class="dg-box" x="200" y="70" width="335.0" height="26" rx="4"/><text class="dg-small dg-mono" x="543.0" y="87" font-size="12">67 ms (33 ms free)</text><text x="0" y="137" font-size="13">3× scenario</text><rect class="dg-warn" x="200" y="120" width="502.5" height="26" rx="4"/><text class="dg-small dg-mono" x="710.5" y="137" font-size="12">100.5 ms: overrun</text></svg>
+    <figcaption>Figure 6. The 100 ms budget. The INT8 median is measured on an earlier build; the 2× and 3× rows are scenarios, not measurements. Shares are of elapsed time, not CPU use.</figcaption>
+    </figure>
+    <div class="table-scroll"><table>
+      <tr><th>Scenario</th><th class="num">Inference time</th><th class="num">Share of the 100 ms window</th><th>Status</th></tr>
+      <tr><td>INT8, measured median</td><td class="num">33.5 ms</td><td class="num">33.5%</td><td>66.5 ms left for other work</td></tr>
+      <tr><td>Scenario: 2× slower</td><td class="num">67 ms</td><td class="num">67%</td><td>33 ms left</td></tr>
+      <tr><td>Scenario: 3× slower</td><td class="num">100.5 ms</td><td class="num">100.5%</td><td>0.5 ms overrun, queue starts to build</td></tr>
+    </table></div>
+    <p>These percentages are elapsed time, not measured CPU use, because the real-time scheduler can interrupt inference to run other tasks. Latency, queues and CPU use all have to be measured on the device.</p>
+
+    <h2>10. The other way to change a model: add neurons</h2>
+    <p>Suppose the team doubles the hidden layer from 128 to 256 neurons to tell <em>mute</em> from <em>up</em> more clearly. That is a different kind of change: the architecture changes, so the work changes.</p>
+    <div class="table-scroll"><table>
+      <tr><th>Resource</th><th class="num">Now</th><th class="num">256 neurons</th><th class="num">16-bit activations</th></tr>
+      <tr><td>Weights</td><td class="num">251,264</td><td class="num">502,528</td><td class="num">251,264</td></tr>
+      <tr><td>Weight storage</td><td class="num">251,264 B</td><td class="num">502,528 B</td><td class="num">251,264 B</td></tr>
+      <tr><td>Input RAM</td><td class="num">1,950 B</td><td class="num">1,950 B</td><td class="num">3,900 B</td></tr>
+      <tr><td>Multiply-accumulates</td><td class="num">251,264</td><td class="num">502,528</td><td class="num">251,264</td></tr>
+    </table></div>
+    <p>More neurons means more storage and more arithmetic. A wider number means a little more RAM and possibly a slower kernel, with the same arithmetic. Two different reasons for a slower model, and two different fixes.</p>
+
+    <h2>11. The mental model to keep</h2>
+    <div class="table-scroll"><table>
+      <tr><th>Question</th><th>What it controls</th></tr>
+      <tr><td>How much knowledge must I store?</td><td>Weight count and weight precision (flash)</td></tr>
+      <tr><td>How much working memory do I need?</td><td>Activation count and precision (RAM)</td></tr>
+      <tr><td>How much arithmetic must I do?</td><td>Operation count (MACs), set by the architecture</td></tr>
+      <tr><td>How fast can my processor do that arithmetic?</td><td>Kernel efficiency, packing and accumulator width</td></tr>
+    </table></div>
+    <p>These four are related but not interchangeable. A model can barely change in flash size and still take much longer to run, because it changed its computation path. Measure all four.</p>
+
+    <h2>Knowledge check</h2>
+    <p>Try the questions first, then open the answer.</p>
+    <details class="lesson-q">
+      <summary>Why is the 16-bit-activation model only about 2 KB bigger than the INT8 one?</summary>
+      <p>Because the 251,264 weights stay 8-bit. Only the input buffer and a few small items grow.</p>
+    </details>
+    <details class="lesson-q">
+      <summary>Does a 16-bit input use more RAM?</summary>
+      <p>Yes. The input grows from 1,950 to 3,900 bytes. The total arena must still be measured, because scratch buffers and bookkeeping add to it.</p>
+    </details>
+    <details class="lesson-q">
+      <summary>Does a 16-bit input change the number of multiply-accumulates?</summary>
+      <p>No, if the architecture stays the same. The count stays at 251,264. What can change is how much time each operation takes.</p>
+    </details>
+    <details class="lesson-q">
+      <summary>Our first guess was that 8-bit input rounding confused <em>mute</em> and <em>up</em>. What did the measurement say?</summary>
+      <p>Input quantization cost only 0.03 accuracy points. Output score quantization cost 3.16 points. The output was the larger source of error.</p>
+    </details>
+    <details class="lesson-q">
+      <summary>Why could the 16-bit build's timing not be used?</summary>
+      <p>Its output was wrong on the device: every class had the same score for silence. A fast wrong answer is not a valid timing.</p>
+    </details>
+    <details class="lesson-q">
+      <summary>Is a 2× slowdown guaranteed for 16-bit activations?</summary>
+      <p>No. It is a scenario. The actual cost depends on the kernel, and it was not measured on a correct build.</p>
+    </details>
+    <details class="lesson-q">
+      <summary>Why does a wider accumulator not need much extra RAM?</summary>
+      <p>One accumulator is reused for all products of a neuron. It is state, not a buffer for each product.</p>
+    </details>
+
+    <h2>Glossary</h2>
+    <div class="table-scroll"><table>
+      <tr><th>Term</th><th>Plain meaning</th></tr>
+      <tr><td>Activation</td><td>A number the network computes from the current input, layer by layer.</td></tr>
+      <tr><td>Arena</td><td>The block of RAM the TensorFlow Lite Micro runtime reserves for activations and scratch space.</td></tr>
+      <tr><td>Bias</td><td>A learned number added to a neuron's sum before the output is used.</td></tr>
+      <tr><td>Cadence</td><td>How often inference runs. Here, one window every 100 ms.</td></tr>
+      <tr><td>Flash</td><td>Non-volatile program memory. Model weights live here in our firmware.</td></tr>
+      <tr><td>Kernel</td><td>The code that performs one operation, such as a fully connected layer.</td></tr>
+      <tr><td>Logit</td><td>A raw output score before it is turned into a probability.</td></tr>
+      <tr><td>MAC</td><td>Multiply-accumulate: one multiplication and one addition into a running total.</td></tr>
+      <tr><td>Quantization</td><td>Storing numbers with fewer bits, using a scale and a zero point to map them to integers.</td></tr>
+      <tr><td>Weight</td><td>A learned number in the model. It stays fixed while the device runs.</td></tr>
+    </table></div>
+
+    <div class="lesson-next">
+      <h2>Keep going</h2>
+      <p>More lessons are planned in this series. If you want the full method behind building an embedded ML product, the book is the reference: <a href="../guide.html">The Embedded Engineer's Guide to Edge AI</a>. For a guided path from reading to building, see <a href="../practice.html">Learning</a>. Questions or corrections are welcome through <a href="../contact.html">Connect</a>.</p>
+      <p><a href="index.html" class="text-link">&larr; All Embedded ML Lessons</a></p>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2 class="footer-heading">Edge2XAI</h2>
+        <p>Embedded Systems and EdgeAI knowledge, learning, mentorship, academic engagement, and selective technical advisory.</p>
+      </div>
+      <div>
+        <h2 class="footer-heading">Knowledge</h2>
+        <ul>
+          <li><a href="../books.html#publications">Books &amp; Handbooks</a></li>
+          <li><a href="../books.html#audio-package">Packaged Learning</a></li>
+          <li><a href="../books.html#knowledge-base">Engineering Knowledge</a></li>
+          <li><a href="../books.html#guided-learning">Guided Learning</a></li>
+          <li><a href="../training.html">Mentorship</a></li>
+          <li><a href="index.html">Embedded ML Lessons</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-heading">Connect</h2>
+        <ul>
+          <li><a href="mailto:info@edge2xai.com">info@edge2xai.com</a></li>
+          <li><a href="https://www.linkedin.com/in/satheesh-g-40199719/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/Edge2XAI/Edge2XAI" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Edge2XAI. All rights reserved.</span>
+      <span>Bridging Embedded Systems and Edge Intelligence</span>
+    </div>
+  </div>
+</footer>
+<script src="../js/menu.js?v=19" defer></script>
+<!-- Cloudflare Web Analytics -->
+<script type="module"
+  src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon='{"token": "7b2b51a27f26406d84b88e5083e38ab2"}'>
+</script>
+<!-- End Cloudflare Web Analytics -->
+</body>
+</html>

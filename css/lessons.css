@@ -1,0 +1,63 @@
+/* Embedded ML Lessons: shared article styles. Uses the tokens from css/site.css. */
+
+.lesson-hero{padding:clamp(56px,7vw,96px) 0 28px;background:var(--paper);}
+.lesson-hero h1{font-size:clamp(2rem,4.5vw,3.1rem);line-height:1.1;margin:12px 0 16px;color:var(--ink);}
+.lesson-hero .lead{max-width:44rem;}
+.lesson-meta{color:var(--ink-faint);font-size:.92rem;margin-top:14px;}
+
+.lesson-body{max-width:var(--reading-max);margin-inline:auto;padding:0 24px 72px;color:var(--ink);font-size:1.05rem;line-height:1.7;}
+.lesson-body h2{margin:56px 0 14px;font-size:1.55rem;line-height:1.25;color:var(--ink);}
+.lesson-body h3{margin:28px 0 10px;font-size:1.2rem;color:var(--ink);}
+.lesson-body p,.lesson-body li{margin:0 0 14px;}
+.lesson-body ul,.lesson-body ol{padding-left:22px;margin:0 0 16px;}
+.lesson-body a{color:var(--copper-strong);}
+.lesson-body code{font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9em;background:var(--surface-2);padding:1px 5px;border-radius:4px;}
+.lesson-body pre{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:16px;overflow-x:auto;font-size:.88rem;line-height:1.5;margin:14px 0 20px;}
+.lesson-body pre code{background:none;padding:0;}
+
+.table-scroll{overflow-x:auto;margin:14px 0 22px;}
+.lesson-body table{width:100%;border-collapse:collapse;font-size:.95rem;}
+.lesson-body th,.lesson-body td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+.lesson-body th{background:var(--surface-2);font-weight:600;}
+.lesson-body td.num,.lesson-body th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+
+.lesson-callout{border-left:4px solid var(--signal);background:var(--signal-tint);padding:14px 18px;border-radius:var(--radius);margin:22px 0;}
+.lesson-callout strong{color:var(--ink);}
+.lesson-callout.warn{border-left-color:var(--copper);background:var(--copper-tint);}
+.lesson-takeaway{border:1px solid var(--line-strong);border-radius:var(--radius);padding:14px 18px;margin:22px 0;background:var(--surface);}
+
+details.lesson-q{border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;margin:10px 0;background:var(--surface);}
+details.lesson-q summary{cursor:pointer;font-weight:600;color:var(--ink);}
+details.lesson-q[open] summary{margin-bottom:8px;}
+
+.lesson-flow{font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9rem;}
+
+.lesson-series-grid{display:grid;gap:18px;margin:28px 0 8px;grid-template-columns:1fr;}
+@media (min-width:760px){.lesson-series-grid{grid-template-columns:1fr 1fr;}}
+.lesson-card{display:block;border:1px solid var(--line);border-radius:var(--radius);padding:22px;background:var(--surface);text-decoration:none;color:var(--ink);}
+.lesson-card:hover{border-color:var(--line-strong);}
+.lesson-card h2{font-size:1.25rem;margin:8px 0 8px;color:var(--ink);}
+.lesson-card p{color:var(--ink-soft);margin:0 0 10px;}
+.lesson-card .lesson-meta{margin-top:0;}
+
+.lesson-next{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);}
+
+/* Two-column hero, matching the other site pages */
+.lesson-hero-grid{display:grid;gap:36px;align-items:center;}
+@media (min-width:900px){.lesson-hero-grid{grid-template-columns:1.05fr .95fr;}}
+.lesson-hero-visual{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--surface);}
+.lesson-hero-visual img{display:block;width:100%;height:auto;}
+
+/* Inline diagrams */
+.lesson-figure{margin:24px 0 28px;border:1px solid var(--line);border-radius:var(--radius);padding:18px 14px 12px;background:var(--surface);}
+.lesson-figure svg{display:block;width:100%;height:auto;}
+.lesson-figure figcaption{color:var(--ink-soft);font-size:.88rem;margin-top:10px;line-height:1.5;}
+.lesson-figure text{font-family:"IBM Plex Sans",Arial,sans-serif;fill:var(--ink);}
+.lesson-figure .dg-small{font-size:12px;fill:var(--ink-soft);}
+.lesson-figure .dg-mono{font-family:"IBM Plex Mono",Consolas,monospace;}
+.lesson-figure .dg-box{fill:var(--surface-2);stroke:var(--line-strong);}
+.lesson-figure .dg-accent{fill:var(--signal-tint);stroke:var(--signal);}
+.lesson-figure .dg-warn{fill:var(--copper-tint);stroke:var(--copper);}
+.lesson-figure .dg-line{stroke:var(--ink-faint);fill:none;stroke-width:1.6;}
+.lesson-figure .dg-arrow{stroke:var(--signal-strong);fill:none;stroke-width:2;marker-end:url(#dgArrow);}
+.lesson-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;}

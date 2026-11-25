@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Embedded ML Lessons — Edge2XAI</title>
+<meta name="description" content="Embedded ML Lessons: short, practical lessons on running machine learning on microcontrollers, from real projects with measured numbers and honest failures.">
+<meta name="theme-color" content="#06152B">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css?v=36">
+<link rel="stylesheet" href="../css/lessons.css?v=1">
+<link rel="canonical" href="https://edge2xai.com/lessons/index.html">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/brand/favicon-32.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="shortcut icon" href="../favicon.ico">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Edge2XAI">
+<meta property="og:title" content="Embedded ML Lessons — Edge2XAI">
+<meta property="og:description" content="Short, practical lessons on running machine learning on microcontrollers, from real projects with measured numbers and honest failures.">
+<meta property="og:url" content="https://edge2xai.com/lessons/index.html">
+<meta property="og:image" content="https://edge2xai.com/images/og-edge2xai.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Embedded ML Lessons — Edge2XAI">
+<meta name="twitter:description" content="Short, practical lessons on running machine learning on microcontrollers.">
+<meta name="twitter:image" content="https://edge2xai.com/images/og-edge2xai.jpg">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="../index.html" class="wordmark brand-logo" aria-label="Edge2XAI home"><picture><source media="(max-width:520px)" srcset="../images/brand/neon/e2x-neon-header-symbol.png"><img class="brand-logo-img" src="../images/brand/neon/e2x-neon-header.png" alt="Edge2XAI" width="192" height="56"></picture></a>
+    <nav class="primary" id="primary-nav" aria-label="Primary navigation">
+      <a href="../books.html">Knowledge</a>
+      <a href="../practice.html">Learning</a>
+      <a href="index.html" aria-current="page">Lessons</a>
+      <a href="../edgeverse.html">EdgeVerse</a>
+      <a href="../advisory.html">Advisory</a>
+      <a href="../about.html">About</a>
+    </nav>
+    <a class="btn btn-primary" href="../contact.html">Connect</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <section class="lesson-hero">
+    <div class="wrap lesson-hero-grid">
+      <div class="lesson-copy">
+        <p class="breadcrumb"><a href="../index.html">Home</a> / Embedded ML Lessons</p>
+        <p class="eyebrow">Embedded ML Lessons</p>
+        <h1>Learn embedded machine learning <em>from real projects.</em></h1>
+        <p class="lead">Short lessons on running neural networks on microcontrollers: memory, numbers, CPU time, real-time limits and the debugging that connects them. Each lesson uses a real project, with measured numbers and the failures included.</p>
+        <div class="lesson-actions">
+          <a class="btn btn-primary" href="weights-activations-memory.html">Start Lesson 1</a>
+          <a class="btn btn-ghost" href="#lessons">All lessons</a>
+        </div>
+      </div>
+      <div class="lesson-hero-visual">
+        <img src="../images/home-system-pipeline-glassy.webp" alt="Pipeline from physical signal through hardware, firmware, DSP and ML runtime to product intelligence">
+      </div>
+    </div>
+  </section>
+
+  <article class="lesson-body" style="max-width:var(--content-max)">
+
+    <h2>Who this is for</h2>
+    <ul>
+      <li><strong>New engineers</strong> starting in embedded ML who want the reasons behind the terms, not only the tools.</li>
+      <li><strong>Embedded engineers</strong> who already ship firmware and are adding a model to a product.</li>
+      <li><strong>ML engineers</strong> who need to understand what the device does with their model.</li>
+    </ul>
+    <p>You do not need a machine learning background for the first lessons. Each one defines its terms and ends with a short knowledge check.</p>
+
+    <h2 id="lessons">Lessons</h2>
+    <div class="lesson-series-grid">
+      <a class="lesson-card" href="weights-activations-memory.html">
+        <p class="eyebrow">Lesson 1 · Memory and computation</p>
+        <h2>Weights, Activations and Memory</h2>
+        <p>Why a more precise number can cost an embedded processor time, not just memory. A voice-command model on an ESP32-S3, with the measurements and one failed experiment.</p>
+        <p class="lesson-meta">About 15 minutes · No ML background needed</p>
+      </a>
+    </div>
+
+    <h2>More lessons in development</h2>
+    <p>The series will cover the path from a physical signal to a deployed model: audio features, quantization, calibration, runtime limits, real-time scheduling, and testing on the device. Topics and order may change as the lessons are written.</p>
+
+    <div class="lesson-next">
+      <p>For the full method, see <a href="../guide.html">The Embedded Engineer's Guide to Edge AI</a>. For a guided path from reading to building, see <a href="../practice.html">Learning</a>.</p>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2 class="footer-heading">Edge2XAI</h2>
+        <p>Embedded Systems and EdgeAI knowledge, learning, mentorship, academic engagement, and selective technical advisory.</p>
+      </div>
+      <div>
+        <h2 class="footer-heading">Knowledge</h2>
+        <ul>
+          <li><a href="../books.html#publications">Books &amp; Handbooks</a></li>
+          <li><a href="../books.html#audio-package">Packaged Learning</a></li>
+          <li><a href="../books.html#knowledge-base">Engineering Knowledge</a></li>
+          <li><a href="../books.html#guided-learning">Guided Learning</a></li>
+          <li><a href="../training.html">Mentorship</a></li>
+          <li><a href="index.html">Embedded ML Lessons</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-heading">Connect</h2>
+        <ul>
+          <li><a href="mailto:info@edge2xai.com">info@edge2xai.com</a></li>
+          <li><a href="https://www.linkedin.com/in/satheesh-g-40199719/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/Edge2XAI/Edge2XAI" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Edge2XAI. All rights reserved.</span>
+      <span>Bridging Embedded Systems and Edge Intelligence</span>
+    </div>
+  </div>
+</footer>
+<script src="../js/menu.js?v=19" defer></script>
+<!-- Cloudflare Web Analytics -->
+<script type="module"
+  src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon='{"token": "7b2b51a27f26406d84b88e5083e38ab2"}'>
+</script>
+<!-- End Cloudflare Web Analytics -->
+</body>
+</html>
